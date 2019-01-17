@@ -15,8 +15,9 @@ import { ServerErrorComponent } from './components/server-error/server-errror.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServerErrorInterceptor } from './interceptors/server-error-interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { ClientComponent } from './client/component/client.component';
+import { RouterModule } from '@angular/router';
+import { StockComponent } from './stock/component/stock.component';
+import { StockModule } from './stock/stock.module';
 
 @NgModule({
   declarations: [
@@ -24,17 +25,17 @@ import { ClientComponent } from './client/component/client.component';
     HomeComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    SidebarComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NgbModule,
     SharedModule,
-    AppRoutingModule,
     CoreModule,
     NgxSpinnerModule,
+    StockModule,
     ToastrModule.forRoot(),
   ],
   providers: [

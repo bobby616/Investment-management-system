@@ -10,6 +10,7 @@ const routes: Routes = [
 
   { path: 'users', loadChildren: './user/user.module#UserModule' },
   { path: 'client', loadChildren: './client/client.module#ClientModule' },
+  { path: 'stock', loadChildren: './stock/stock.module#StockModule' },
 
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },
