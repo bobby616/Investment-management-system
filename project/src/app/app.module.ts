@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServerErrorInterceptor } from './interceptors/server-error-interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { ClientComponent } from './client/component/client.component';
 
 @NgModule({
   declarations: [
@@ -55,4 +56,4 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

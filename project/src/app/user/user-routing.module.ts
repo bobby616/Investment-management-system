@@ -23,11 +23,15 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     canActivate: [AnonymousRouteActivatorService]
-  }
+  },
+  {
+    path: '',
+    redirectTo: '/not-found'
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UserRoutingModule {}
+export class UserRoutingModule { }

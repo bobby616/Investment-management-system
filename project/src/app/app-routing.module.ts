@@ -5,10 +5,11 @@ import { NgModule } from '@angular/core';
 import { ServerErrorComponent } from './components/server-error/server-errror.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/users/login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
 
   { path: 'users', loadChildren: './user/user.module#UserModule' },
+  { path: 'client', loadChildren: './client/client.module#ClientModule' },
 
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },
