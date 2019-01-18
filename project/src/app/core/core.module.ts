@@ -6,9 +6,11 @@ import { StorageService } from './storage.service';
 import { NotificatorService } from './notificator.service';
 import { AuthService } from './auth.service';
 import { SearchService } from './search.service';
+import { AppConfig } from '../common/app.config';
 
 @NgModule({
   providers: [
+    AppConfig,
     RequesterService,
     StorageService,
     NotificatorService,

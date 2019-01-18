@@ -4,6 +4,7 @@ import { RequesterService } from './requester.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { UserModel } from '../user/models/user.model';
+import { AppConfig } from '../common/app.config';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,8 @@ export class AuthService {
 
   public constructor(
     private readonly storageService: StorageService,
-    private readonly requester: RequesterService
+    private readonly requester: RequesterService,
+    private readonly app: AppConfig,
   ) {}
 
   public get isLoggedIn$(): Observable<boolean> {
@@ -25,14 +27,14 @@ export class AuthService {
 
   public registerUser(user: UserModel): Observable<any> {
     return this.requester.post(
-      'http://localhost:5000/auth/register',
+      `${this.app.apiUrl}/auth/register`,
       JSON.stringify(user)
     );
   }
 
   public loginUser(user: UserModel): Observable<any> {
     return this.requester
-      .post('http://localhost:5000/auth/login', JSON.stringify(user))
+      .post(`${this.app.apiUrl}/auth/login`, JSON.stringify(user))
       .pipe(
         tap(response => {
           this.storageService.setItem('token', (<any>response).token);
@@ -42,7 +44,7 @@ export class AuthService {
   }
 
   public logoutUser(): Observable<any> {
-    return this.requester.post('http://localhost:5000/auth/logout', null).pipe(
+    return this.requester.post(`${this.app.apiUrl}/auth/logout`, null).pipe(
       tap(() => {
         this.storageService.removeItem('token');
         this.isLoggedInSubject$.next(false);

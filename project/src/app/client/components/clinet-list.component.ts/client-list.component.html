@@ -1,0 +1,56 @@
+<div class='card'>
+  <div class='card-header'>
+    {{pageTitle}}
+  </div>
+  <!-- client id, first name, last name, age, address, date of creation,
+     balance, current profit or loss from open positions,
+      a list of active and past positions, assigned account manager. -->
+  <div class='card-body'>
+    <div class='row'>
+      <div class='col-md-2'>Filter by:</div>
+      <div class='col-md-4'>
+        <input type='text' [(ngModel)]='listFilter' />
+      </div>
+    </div>
+    <div class='row' *ngIf='listFilter'>
+      <div class='col-md-6'>
+        <h4>Filtered by: {{listFilter}}</h4>
+      </div>
+    </div>
+    <div class='table-responsive'>
+      <table class='table' *ngIf='clients && clients.length'>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Date of creation</th>
+            <th>Balance</th>
+            <th>Profit/Loss</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let client of filteredClients'>
+            <td>
+              {{client.id}}
+            </td>
+            <td>
+                {{ client.firstName }}
+            </td>
+            <td>{{ client.lastName }}</td>
+            <td>{{ client.age }}</td>
+            <td>{{ client.address }}</td>
+            <td>{{ client.dateregistered }}</td>
+            <td>{{ client.funds.currentamount | currency:'USD':'symbol':'1.2-2'}}</td>
+            <td>TO DO: Profit/Loss</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div *ngIf='errorMessage' class='alert alert-danger'>
+  Error: {{ errorMessage }}
+</div>

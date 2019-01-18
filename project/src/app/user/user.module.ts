@@ -8,6 +8,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserDataService } from './services/users-data.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppConfig } from '../common/app.config';
 
 @NgModule({
   imports: [SharedModule, UserRoutingModule, FormsModule, ReactiveFormsModule],

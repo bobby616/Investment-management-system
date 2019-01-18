@@ -33,16 +33,16 @@ export class LoginComponent implements OnInit {
 
 
   public login(): void {
-    // this.authService.loginUser(this.loginForm.value).subscribe(
-    //   () => {
-    //     this.notificator.success('Logged in successfully!');
-    //     this.router.navigate(['/home']);
-    //   },
-    //   error => {
-    //     console.log(error);
-    //     this.notificator.error('Reason...', 'Login failed!');
-    //   }
-    // );
+    this.authService.loginUser(this.loginForm.value).subscribe(
+      () => {
+        this.notificator.success('Logged in successfully!');
+        this.router.navigate(['/home']);
+      },
+      error => {
+        console.log(error);
+        this.notificator.error('Reason...', 'Login failed!');
+      }
+    );
   }
 
   public cancel(): void {

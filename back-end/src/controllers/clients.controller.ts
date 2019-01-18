@@ -4,24 +4,15 @@ import { Controller, Get, UseGuards } from '@nestjs/common';
 import { UsersService } from '../common/core/services/users.service';
 import { RolesGuard, Roles } from 'src/common';
 
-@Controller('users')
+@Controller('clients')
 export class UsersController {
 
   constructor(
-    private readonly usersService: UsersService,
+    private readonly clientService: UsersService,
   ) { }
 
   @Get()
-  /* @Roles('admin')
-  @UseGuards(AuthGuard(), RolesGuard) */
   all() {
-    return this.usersService.getAllUsers();
-  }
-
-  @Get('/clients')
-  /* @Roles('admin')
-  @UseGuards(AuthGuard(), RolesGuard) */
-  allClients() {
-    return this.usersService.getAllClients();
+    return this.clientService.getAllClients();
   }
 }

@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ClientComponent } from './component/client.component';
 import { SidebarComponent } from '../shared/sidebar/sidebar.component';
+import { ClientComponent } from './components/client-component/client.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/users/all', pathMatch: 'full' },

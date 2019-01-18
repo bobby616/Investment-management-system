@@ -16,8 +16,7 @@ const routes: Routes = [
 
   {
     path: 'login',
-    component: LoginComponent,
-    canActivate: [AnonymousRouteActivatorService]
+    component: LoginComponent
   },
   {
     path: 'register',
