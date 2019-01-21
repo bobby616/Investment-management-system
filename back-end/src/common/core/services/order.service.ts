@@ -72,7 +72,7 @@ export class OrderService {
     }
 
     async getOrdersByClient(id: string) {
-        const foundOrder = await this.orderRepository.findOneOrFail({ where: { clientId: id } });
+        const foundOrder = await this.orderRepository.findOne({ where: { clientId: id } });
 
         if (!foundOrder) {
             throw new HttpException('Orders not found!', HttpStatus.NOT_FOUND);

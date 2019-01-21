@@ -92,4 +92,7 @@ export class CompaniesService {
 
         return companies.length;
     }
+    async getAllCompanies() {
+        return await this.companyRepository.find({});
+    }
 }

@@ -118,8 +118,10 @@ export class UsersService {
     return this.usersRepository.find({});
   }
 
-  async getAllClients() {
-    return this.clientRepository.find({});
+  async getAllClients(email?) {
+    return this.clientRepository.find({manager: {
+      email: email
+    }});
   }
 
   async getClient(id: string): Promise<Client> {

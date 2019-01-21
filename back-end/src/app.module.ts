@@ -10,6 +10,7 @@ import { IndustryModule } from './modules/industry/industry.modul';
 import { WatchlistModule } from './modules/watchlist/watchlist.module';
 import { PricesModule } from './modules/prices/prices.modul';
 import { UsersModule } from './modules/users.module';
+import { StocksController } from './controllers/stocks.controller';
 @Module({
   imports: [
     ConfigModule,
@@ -23,7 +24,7 @@ import { UsersModule } from './modules/users.module';
     PricesModule,
     UsersModule,
   ],
-  controllers: [],
+  controllers: [StocksController],
   providers: [UsersService],
 })
 export class AppModule { }
