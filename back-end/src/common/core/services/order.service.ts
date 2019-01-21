@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { Order } from '../../../data/entities/order.entity';
 import { OrderDTO } from '../../../models/order/order.dto';
 import { Client } from 'src/data/entities/client.entity';
+import { CloseOrderDTO } from 'src/models/order/closeOrder.dto';
 
 @Injectable()
 export class OrderService {
@@ -44,9 +45,9 @@ export class OrderService {
             try {
                 const createOrder: Order = await this.orderRepository.create();
                 createOrder.opendate = order.openDate;
-                createOrder.closedate = order.closeDate;
+                // createOrder.closedate = order.closeDate;
                 createOrder.buyprice = order.buyPrice;
-                createOrder.sellprice = order.sellPrice;
+                // createOrder.sellprice = order.sellPrice;
                 createOrder.units = order.units;
                 createOrder.client = Promise.resolve(foundUser);
                 createOrder.status = foundStatus;
@@ -81,10 +82,12 @@ export class OrderService {
         return foundOrder;
     }
 
-    async closeOrder(id: string): Promise<Order> {
+    async closeOrder(id: string, orderClose: CloseOrderDTO): Promise<Order> {
         try {
             const order: Order = await this.orderRepository.findOne({ id })
             order.status = await this.statusRepository.findOne({ where: { statusname: 'closed' } })
+            order.closedate = new Date();
+            order.sellprice = orderClose.sellPrice;
             return await this.orderRepository.save(order);
         } catch (error) {
             throw new HttpException('Orders not found!', HttpStatus.NOT_FOUND);

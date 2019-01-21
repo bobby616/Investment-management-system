@@ -16,8 +16,8 @@ export class StocksController {
   ) { }
 
   @Get('all')
-  @Roles('manager')
-  @UseGuards(AuthGuard(), RolesGuard)
+/*   @Roles('manager')
+  @UseGuards(AuthGuard(), RolesGuard) */
   all() {
     return this.companiesService.getAllCompanies();
   }

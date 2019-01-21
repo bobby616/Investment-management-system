@@ -1,4 +1,7 @@
-<p>
-  stock works!
-</p>
-<app-sidebar></app-sidebar>
+<ag-grid-angular 
+    style="width: 500px; height: 500px;" 
+    class="ag-theme-balham"
+    [rowData]="rowData | async"
+    [columnDefs]="columnDefs"
+    >
+</ag-grid-angular>

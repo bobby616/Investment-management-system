@@ -17,11 +17,4 @@ export class UsersController {
   all() {
     return this.usersService.getAllUsers();
   }
-
-  @Get('/clients')
-  /* @Roles('admin')
-  @UseGuards(AuthGuard(), RolesGuard) */
-  allClients() {
-    return this.usersService.getAllClients();
-  }
 }

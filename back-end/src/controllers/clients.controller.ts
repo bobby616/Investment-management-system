@@ -24,4 +24,11 @@ export class ClientsController {
 
   }
 
+  @Get('/all')
+  /* @Roles('admin')
+  @UseGuards(AuthGuard(), RolesGuard) */
+  allClients() {
+    return this.usersService.getAllClients();
+  }
+
 }
