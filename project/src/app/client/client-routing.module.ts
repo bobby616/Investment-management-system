@@ -4,7 +4,7 @@ import { SidebarComponent } from '../shared/sidebar/sidebar.component';
 import { ClientComponent } from './components/client-component/client.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/users/all', pathMatch: 'full' },
+    { path: '', redirectTo: '/clients/all', pathMatch: 'full' },
     {
       path: 'all',
       component: ClientComponent

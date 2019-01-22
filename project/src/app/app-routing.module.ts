@@ -3,11 +3,13 @@ import { HomeComponent } from './components/home/home.component';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ServerErrorComponent } from './components/server-error/server-errror.component';
+import { LoginComponent } from './user/login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/users/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
 
+  { path: 'login', component: LoginComponent },
   { path: 'users', loadChildren: './user/user.module#UserModule' },
   { path: 'client', loadChildren: './client/client.module#ClientModule' },
   { path: 'stock', loadChildren: './stock/stock.module#StockModule' },

@@ -11,8 +11,6 @@ export class ClientsController {
 
   constructor(
     private readonly usersService: UsersService,
-    private readonly ordersService: OrderService,
-    private readonly clientsService: ClientsService,
   ) { }
 
   @Get('orders')

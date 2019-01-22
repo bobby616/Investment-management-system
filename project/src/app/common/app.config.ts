@@ -3,7 +3,7 @@ export class AppConfig{
 
     constructor ()
     {
-        this.apiUrl = 'http://localhost:5000';
+        this.apiUrl = 'http://localhost:5001';
     }
 
 }

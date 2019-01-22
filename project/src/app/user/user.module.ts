@@ -14,7 +14,6 @@ import { AppConfig } from '../common/app.config';
   imports: [SharedModule, UserRoutingModule, FormsModule, ReactiveFormsModule],
   declarations: [
     RegisterComponent,
-    LoginComponent,
     UsersListComponent,
     SentenceCasePipe,
   ],

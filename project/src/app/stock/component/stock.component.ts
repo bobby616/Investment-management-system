@@ -11,8 +11,10 @@ export class StockComponent implements OnInit {
 
   title = 'app';
 
-  columnDefs = [
-      {headerName: 'id', field: 'id', sortable: true, filter: true},
+  public columnDefs = [
+      {headerName: 'id', field: 'id', sortable: true, filter: true, onCellClicked: (event) => {
+        console.log(event);
+      }},
       {headerName: 'Name', field: 'name', sortable: true, filter: true},
       {headerName: 'Abbriviature', field: 'abbr', sortable: true, filter: true },
       {headerName: 'Icon', field: 'icon', sortable: true, filter: true },

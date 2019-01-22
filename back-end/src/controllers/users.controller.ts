@@ -11,10 +11,15 @@ export class UsersController {
     private readonly usersService: UsersService,
   ) { }
 
-  @Get()
+  @Get('all')
   /* @Roles('admin')
   @UseGuards(AuthGuard(), RolesGuard) */
   all() {
     return this.usersService.getAllUsers();
+  }
+
+  @Get('/clients')
+  all1() {
+    return this.usersService.getAllClients();
   }
 }
