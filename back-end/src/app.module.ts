@@ -11,6 +11,10 @@ import { WatchlistModule } from './modules/watchlist/watchlist.module';
 import { PricesModule } from './modules/prices/prices.modul';
 import { UsersModule } from './modules/users.module';
 import { StocksController } from './controllers/stocks.controller';
+import { UsersController } from './controllers/users.controller';
+import { FundsController } from './controllers/funds.controller';
+import { OrdersController } from './controllers/orders.controller';
+import { IndustryController } from './controllers/industry.controller';
 @Module({
   imports: [
     ConfigModule,
@@ -24,7 +28,7 @@ import { StocksController } from './controllers/stocks.controller';
     PricesModule,
     UsersModule,
   ],
-  controllers: [StocksController],
+  controllers: [StocksController, FundsController, OrdersController, IndustryController],
   providers: [UsersService],
 })
 export class AppModule { }
