@@ -5,11 +5,11 @@
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
         <a [routerLink]="['/home']">
-          Hello, "Manager Name"
+          Hello, {{token.fullname}}
         </a>
       </li>
       <li>
-        <a [routerLink]="['/client/all']">Clients</a>
+        <a [routerLink]="['/client/all']"><ion-icon name="heart"></ion-icon>Clients</a>
       </li>
       <li>
         <a [routerLink]="['/stock/all']">Stocks</a>

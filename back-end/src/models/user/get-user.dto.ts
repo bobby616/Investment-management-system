@@ -8,4 +8,6 @@ export class GetUserDTO {
   password: string;
 
   role: Role;
+
+  fullname: string;
 }
