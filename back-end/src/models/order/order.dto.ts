@@ -6,5 +6,4 @@ export class OrderDTO {
     sellPrice: number;
     units: number;
     companyId: number;
-
 }

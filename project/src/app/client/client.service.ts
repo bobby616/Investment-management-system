@@ -14,10 +14,7 @@ export class ClientService {
         private readonly app: AppConfig, ) { }
 
     getClients(): Observable<Client[]> {
-        return this.http.get<Client[]>(`${this.app.apiUrl}/users/clients`).pipe(
-            tap(data => console.log('All: ' + JSON.stringify(data))),
-            catchError(this.handleError)
-        );
+        return this.http.get<Client[]>(`${this.app.apiUrl}/users/clients`);
     }
 
     private handleError(err: HttpErrorResponse) {

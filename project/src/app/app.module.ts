@@ -15,9 +15,11 @@ import { ServerErrorComponent } from './components/server-error/server-errror.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServerErrorInterceptor } from './interceptors/server-error-interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
-import { RouterModule } from '@angular/router';
-import { StockComponent } from './stock/component/stock.component';
+import { AgGridModule } from "ag-grid-angular/main";
 import { StockModule } from './stock/stock.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LoginComponent } from './user/login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { StockModule } from './stock/stock.module';
     HomeComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    LoginComponent
   ],
   imports: [
     AppRoutingModule,
@@ -32,11 +35,14 @@ import { StockModule } from './stock/stock.module';
     BrowserAnimationsModule,
     HttpClientModule,
     NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     CoreModule,
     NgxSpinnerModule,
     StockModule,
     ToastrModule.forRoot(),
+    AgGridModule.withComponents([])
   ],
   providers: [
     {

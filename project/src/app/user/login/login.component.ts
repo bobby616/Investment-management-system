@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
+  styles: ['./login.component.css'] ,
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
