@@ -23,7 +23,7 @@ export class FundsController {
     ) { }
 
 
-    @Get('/client:id')
+    @Get('/client/:id')
     async getCurrendFund(@Param('id') clientId: string): Promise<number> {
         return this.fundsService.currentFund(clientId);
     }

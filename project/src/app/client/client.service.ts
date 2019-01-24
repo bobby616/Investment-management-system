@@ -17,6 +17,10 @@ export class ClientService {
         return this.http.get<Client[]>(`${this.app.apiUrl}/users/clients`);
     }
 
+    getClient(id: string): Observable<Client> {
+        return this.http.get<Client>(`${this.app.apiUrl}/users/getClient/${id}`);
+    }
+
     private handleError(err: HttpErrorResponse) {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console

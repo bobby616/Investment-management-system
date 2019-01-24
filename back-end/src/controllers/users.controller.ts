@@ -27,12 +27,12 @@ export class UsersController {
     return this.usersService.getAllClients();
   }
 
-  @Get('/getClient:id')
+  @Get('/getClient/:id')
   getClientById(@Param('id') id: string) {
     return this.usersService.getClient(id);
   }
 
-  @Get('/getManager:id')
+  @Get('/getManager/:id')
   getManagerById(@Param('id') id: string) {
     return this.usersService.getManager(id);
   }

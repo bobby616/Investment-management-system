@@ -2,12 +2,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { SidebarComponent } from '../shared/sidebar/sidebar.component';
 import { ClientComponent } from './components/client-component/client.component';
+import { ClientManageComponent } from './components/client-manage/client-manage.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/clients/all', pathMatch: 'full' },
     {
-      path: 'all',
+      path: '',
       component: ClientComponent
+    },
+    {
+      path: ':id', component: ClientManageComponent
+      /* loadChildren: './clientManage.module#ClientManageModule' */
     },
     {
       path: '**',

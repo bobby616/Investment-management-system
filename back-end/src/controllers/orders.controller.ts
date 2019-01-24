@@ -17,7 +17,7 @@ export class OrdersController {
         private readonly industryService: IndustriesService,
     ) { }
 
-    @Post('/create:id')
+    @Post('/create/:id')
     async createOrder(@Body(new ValidationPipe({
         transform: true,
         whitelist: true,
@@ -30,7 +30,7 @@ export class OrdersController {
         return this.ordersService.getOrdersAll();
     }
 
-    @Get('/client:id')
+    @Get('/client/:id')
     async getOrdersByClient(@Param('id') id: string){
         return this.ordersService.getOrdersByClient(id);
     }
