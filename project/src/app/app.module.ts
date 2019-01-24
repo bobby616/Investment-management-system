@@ -19,6 +19,8 @@ import { AgGridModule } from "ag-grid-angular/main";
 import { StockModule } from './stock/stock.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './user/login/login.component';
+import { IconSvgExample } from './components/icons/icons.component';
+import { MatIconModule } from '@angular/material';
 
 
 @NgModule({
@@ -27,11 +29,13 @@ import { LoginComponent } from './user/login/login.component';
     HomeComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    LoginComponent
+    LoginComponent,
+    IconSvgExample
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
+    MatIconModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NgbModule,

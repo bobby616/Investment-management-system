@@ -3,22 +3,48 @@
   <!-- Sidebar -->
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
+      <li class="sidebar-brand sidebar-name">
+        Hello, "Manager Name"
+      </li>
       <li class="sidebar-brand">
         <a [routerLink]="['/home']">
-          Hello, "Manager Name"
+          <i class="material-icons sidebar-material-icons">
+            home
+          </i>
+          <small class="sidebar-text">Home</small>
         </a>
       </li>
       <li>
-        <a [routerLink]="['/client/all']">Clients</a>
+        <a [routerLink]="['/client/all']">
+          <i class="material-icons sidebar-material-icons">
+            account_circle
+          </i>
+          <small class="sidebar-text">Clients</small>
+        </a>
       </li>
       <li>
-        <a [routerLink]="['/stock/all']">Stocks</a>
+        <a [routerLink]="['/stock/all']">
+          <i class="material-icons sidebar-material-icons">
+            view_list
+          </i>
+          <small class="sidebar-text">Stock</small>
+        </a>
       </li>
       <li>
-        <a href="#">Watchlist</a>
+        <a href="#">
+          <i class="material-icons sidebar-material-icons">
+            remove_red_eye
+          </i>
+          <small class="sidebar-text">Watchlist</small>
+        </a>
       </li>
       <li>
-        <a href="#">History</a>
+        <a href="#">
+          <i class="material-icons sidebar-material-icons">
+            history
+          </i>
+          <small class="sidebar-text">History</small>
+        </a>
       </li>
     </ul>
   </div>
@@ -26,7 +52,7 @@
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
-<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </div>
   <!-- /#page-content-wrapper -->
 </div>

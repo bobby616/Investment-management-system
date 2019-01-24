@@ -123,3 +123,17 @@
         margin-right: 0;
     } 
 } 
+.sidebar-name {
+    color: darkgray;
+}
+
+.sidebar-material-icons {
+    position: relative;
+    left: -30px;
+    bottom: -5.5px;
+}
+
+.sidebar-text {
+    position: relative;
+    left: -25px;
+}
