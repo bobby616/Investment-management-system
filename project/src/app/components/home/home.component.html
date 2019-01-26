@@ -4,7 +4,7 @@
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li class="sidebar-brand sidebar-name">
-        Hello, "Manager Name"
+        Hello, {{token.fullname}}
       </li>
       <li class="sidebar-brand">
         <a [routerLink]="['/home']">
@@ -15,7 +15,7 @@
         </a>
       </li>
       <li>
-        <a [routerLink]="['/client/all']">
+        <a [routerLink]="['/manager/clients']">
           <i class="material-icons sidebar-material-icons">
             account_circle
           </i>
