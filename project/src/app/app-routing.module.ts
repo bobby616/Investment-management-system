@@ -7,6 +7,7 @@ import { RoleGuard } from './core/route-guards/route-guard.service';
 import { AdminGuard } from './core/admin-guard';
 import { ManagerGuard } from './core/manager-guard';
 import { LoginComponent } from './auth/login/login.component';
+import { StockComponent } from './stock/component/stock.component';
 
 const routes: Routes = [
 

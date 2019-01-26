@@ -32,7 +32,6 @@ import { ManagerModule } from './managerOverview/manager.module';
     NotFoundComponent,
     ServerErrorComponent,
     LoginComponent,
-    
   ],
   imports: [
     AppRoutingModule,
