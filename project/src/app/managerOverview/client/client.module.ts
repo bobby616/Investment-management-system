@@ -1,12 +1,12 @@
 import { ClientRoutingModule } from './client-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
 import { NgModule } from '@angular/core';
-import { TableListComponent } from '../components/table-list/table-list.component';
 import { ClientListComponent } from './components/clinet-list.component.ts/client-list.component';
 import { ClientComponent } from './components/client-component/client.component';
 import { ClientService } from './client.service';
 import { ClientManageComponent } from './components/client-manage/client-manage.component';
+import { TableListComponent } from 'src/app/components/table-list/table-list.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
     imports: [SharedModule, ClientRoutingModule, FormsModule, ReactiveFormsModule],
@@ -14,7 +14,7 @@ import { ClientManageComponent } from './components/client-manage/client-manage.
       ClientListComponent,
       ClientComponent,
       TableListComponent,
-      ClientManageComponent,
+      ClientManageComponent
     ],
     providers: [ClientService]
   })
