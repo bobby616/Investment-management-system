@@ -7,7 +7,7 @@ import { StockComponent } from './component/stock.component';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/stock/all',
+        redirectTo: '/manager/stock/all',
         pathMatch: 'full'
     },
     {
