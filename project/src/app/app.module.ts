@@ -19,7 +19,7 @@ import { AgGridModule } from "ag-grid-angular/main";
 import { StockModule } from './stock/stock.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './user/login/login.component';
-import { IconSvgExample } from './components/icons/icons.component';
+/* import { IconSvgExample } from './components/icons/icons.component'; */
 import { MatIconModule } from '@angular/material';
 
 
@@ -30,7 +30,7 @@ import { MatIconModule } from '@angular/material';
     NotFoundComponent,
     ServerErrorComponent,
     LoginComponent,
-    IconSvgExample
+    /* IconSvgExample */
   ],
   imports: [
     AppRoutingModule,
