@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css'],
   templateUrl: './home.component.html'
 })
-export class HomeComponent {}
+export class HomeComponent {
+  token = jwt_decode(localStorage.getItem('token')) 
+
+
+}

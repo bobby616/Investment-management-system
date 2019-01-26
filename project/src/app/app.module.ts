@@ -23,7 +23,7 @@ import { AdminGuard } from './core/admin-guard';
 import { ManagerGuard } from './core/manager-guard';
 import { RoleGuard } from './core/route-guards/route-guard.service';
 import { ManagerModule } from './managerOverview/manager.module';
-
+import { MatIconModule } from '@angular/material';
 
 
 @NgModule({
@@ -36,6 +36,7 @@ import { ManagerModule } from './managerOverview/manager.module';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    MatIconModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NgbModule,

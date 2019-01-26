@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import jwt_decode from 'jwt-decode';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  token = jwt_decode(localStorage.getItem('token')) 
 
-  ngOnInit() {
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon(
+        'thumbs-up',
+        sanitizer.bypassSecurityTrustResourceUrl('../../../assets/thumbs-up.svg'));
   }
-
+  ngOnInit() {
+    
+  }
+  
 }

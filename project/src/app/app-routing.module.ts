@@ -32,9 +32,9 @@ const routes: Routes = [
 
   /* { path: 'login', component: LoginComponent },
   { path: 'users', loadChildren: './user/user.module#UserModule' },
-  { path: 'clients', loadChildren: './client/client.module#ClientModule' },
-  { path: 'stock', loadChildren: './stock/stock.module#StockModule' }, */
-
+  { path: 'client', loadChildren: './client/client.module#ClientModule' },
+  { path: 'stock', loadChildren: './stock/stock.module#StockModule' },
+  /* { path: 'test', component: IconSvgExample }, */
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },
 
