@@ -57,7 +57,7 @@ export class UsersController {
   async createClient(@Body(new ValidationPipe({
     transform: true,
     whitelist: true,
-  })) client: ClientRegisterDTO, managerId: string): Promise<Client> {
-    return this.usersService.createClient(managerId, client);
+  })) client: ClientRegisterDTO): Promise<Client> {
+    return this.usersService.createClient(client);
   }
 }

@@ -14,23 +14,22 @@ const routes: Routes = [
   {
     path: '', redirectTo: '/login', pathMatch: 'full' /* canActivate: [RoleGuard], */
   },
- /* {
-    path: 'admin', loadChildren: './admin/admin.module#AdminModule',
+  {
+    path: 'admin', loadChildren: './adminOverview/admin.module#AdminModule',
     canActivate: [AdminGuard],
-    './manager/manager.module#ManagerModule'
-    }, */
-{
+  },
+  {
     path: 'manager', /* component: HomeComponent, */
     loadChildren: './managerOverview/manager.module#ManagerModule',
     canActivate: [ManagerGuard],
-},
+  },
 
 
   /* { path: '', redirectTo: '/login', pathMatch: 'full'}, */
   /* { path: 'home', component: HomeComponent}, */
 
 
-   { path: 'login', component: LoginComponent }, /*
+  { path: 'login', component: LoginComponent }, /*
   { path: 'users', loadChildren: './user/user.module#UserModule' },
   { path: 'client', loadChildren: './client/client.module#ClientModule' },
   { path: 'stock', loadChildren: './stock/stock.module#StockModule' },
@@ -47,4 +46,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

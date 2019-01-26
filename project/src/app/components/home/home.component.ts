@@ -7,7 +7,5 @@ import * as jwt_decode from 'jwt-decode';
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  token = jwt_decode(localStorage.getItem('token')) 
-
-
+  token = jwt_decode(localStorage.getItem('token'));
 }

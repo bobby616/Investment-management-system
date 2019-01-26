@@ -16,8 +16,6 @@ import { ClientService } from './client/client.service';
     declarations: [
     ],
     imports: [
-    //  ClientModule,
-    //  ClientManageModule,
         ManagerRoutingModule,
         SharedModule,
         FormsModule,

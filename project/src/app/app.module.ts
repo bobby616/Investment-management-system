@@ -24,6 +24,9 @@ import { ManagerGuard } from './core/manager-guard';
 import { RoleGuard } from './core/route-guards/route-guard.service';
 import { ManagerModule } from './managerOverview/manager.module';
 import { MatIconModule } from '@angular/material';
+import { AdminHomeComponent } from './adminOverview/admin-home/admin-home.component';
+import { AddClientComponent } from './adminOverview/add-client/add-client.component';
+import { AddManagerComponent } from './adminOverview/add-manager/add-manager.component';
 
 
 @NgModule({
