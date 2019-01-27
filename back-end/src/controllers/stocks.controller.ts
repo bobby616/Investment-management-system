@@ -38,12 +38,12 @@ export class StocksController {
     return this.companiesService.updateCompany(companyId, company);
   }
 
-  @Get('/industry:id')
+  @Get('/industry/:id')
   async getCompaniesByIndustry(@Param('id') id: string): Promise<Company[]> {
     return this.companiesService.getCompaniesByIndustry(id);
   }
 
-  @Get('/industry:id')
+  @Get('/industry/:id')
   async getCompaniesTimesListed(@Param('id') id: string): Promise<number> {
     return this.companiesService.getCompanyTimesListed(id);
   }

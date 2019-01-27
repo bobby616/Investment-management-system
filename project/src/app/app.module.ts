@@ -18,19 +18,21 @@ import { ToastrModule } from 'ngx-toastr';
 import { AgGridModule } from "ag-grid-angular/main";
 import { StockModule } from './stock/stock.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LoginComponent } from './user/login/login.component';
-/* import { IconSvgExample } from './components/icons/icons.component'; */
+import { LoginComponent } from './auth/login/login.component';
+import { AdminGuard } from './core/admin-guard';
+import { ManagerGuard } from './core/manager-guard';
+import { RoleGuard } from './core/route-guards/route-guard.service';
+import { ManagerModule } from './managerOverview/manager.module';
 import { MatIconModule } from '@angular/material';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     NotFoundComponent,
     ServerErrorComponent,
     LoginComponent,
-    /* IconSvgExample */
+    
   ],
   imports: [
     AppRoutingModule,
@@ -63,7 +65,10 @@ import { MatIconModule } from '@angular/material';
       provide: HTTP_INTERCEPTORS,
       useClass: ServerErrorInterceptor,
       multi: true
-    }
+    },
+    AdminGuard,
+    ManagerGuard,
+    RoleGuard
   ],
   bootstrap: [AppComponent]
 })
