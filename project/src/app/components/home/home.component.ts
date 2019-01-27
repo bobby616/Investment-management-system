@@ -10,9 +10,12 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   token = jwt_decode(localStorage.getItem('token'));
+
+
   constructor(private readonly authService: AuthenticationService,
     private readonly router: Router) {}
-  logOut() {
+  
+    logOut() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }

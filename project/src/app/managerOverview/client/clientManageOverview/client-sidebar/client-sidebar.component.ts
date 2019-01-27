@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Client } from '../../models/client.model';
 import { ClientService } from '../../client.service';
 
 @Component({
-  selector: 'app-client-manage',
-  templateUrl: './client-manage.component.html',
-  styleUrls: ['./client-manage.component.css']
+  selector: 'app-client-sidebar',
+  templateUrl: './client-sidebar.component.html',
+  styleUrls: ['./../../../../components/home/home.component.css']
 })
-export class ClientManageComponent implements OnInit {
+export class ClientSidebarComponent implements OnInit {
+  id: string;
+  client: Client;
 
-  client: Client | undefined;
 
   constructor(private readonly route: ActivatedRoute,
-    private readonly router: Router,
     private readonly clientService: ClientService) { }
-
-  
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
@@ -32,7 +30,4 @@ export class ClientManageComponent implements OnInit {
     });
   }
 
-  onBack(){
-    this.router.navigate(['/clients']);
-  }
 }

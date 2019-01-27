@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ClientComponent } from './components/client-component/client.component';
-import { ClientManageComponent } from './components/client-manage/client-manage.component';
+import { ClientManageComponent } from './clientManageOverview/client-manage/client-manage.component';
 
 const routes: Routes = [
     {
@@ -9,8 +9,7 @@ const routes: Routes = [
       component: ClientComponent
     },
     {
-      path: ':id', component: ClientManageComponent
-      /* loadChildren: './clientManage.module#ClientManageModule' */
+      path: ':id', loadChildren: './clientManageOverview/clientManage.module#ClientManageModule'
     },
     {
       path: '**',
