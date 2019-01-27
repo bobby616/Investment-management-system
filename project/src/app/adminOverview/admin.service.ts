@@ -5,6 +5,7 @@ import { AppConfig } from '../common/app.config';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AdminModel } from './models/admin-model';
 
 @Injectable()
 export class AdminService{
@@ -18,6 +19,15 @@ export class AdminService{
     public createClient(client: ClientModel): void {
         this.requester.post(
         `${this.app.apiUrl}/users/createClient`, client).subscribe((data) => {
+            this.toastService.success('', 'Successfully added');
+        },
+            (err: HttpErrorResponse) => {
+                this.toastService.error('', 'Error occurred!');
+            });
+    }
+    public createAdmin(admin: AdminModel): void {
+        this.requester.post(
+        `${this.app.apiUrl}/users/createAdmin`, admin).subscribe((data) => {
             this.toastService.success('', 'Successfully added');
         },
             (err: HttpErrorResponse) => {

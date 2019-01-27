@@ -7,12 +7,14 @@ import { AddManagerComponent } from './add-manager/add-manager.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { AdminService } from './admin.service';
+import { AddAdminComponent } from './add-admin/add-admin.component';
 
 @NgModule({
   declarations: [
     AdminHomeComponent,
     AddClientComponent,
     AddManagerComponent,
+    AddAdminComponent
   ],
   imports: [
     AdminRoutingModule,
