@@ -6,6 +6,7 @@ import { AdminService } from '../admin.service';
 @Component({
   selector: 'app-add-client',
   templateUrl: './add-client.component.html',
+  providers: [AdminService],
   styleUrls: ['./add-client.component.css']
 })
 export class AddClientComponent implements OnInit {
