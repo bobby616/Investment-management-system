@@ -86,13 +86,15 @@ export class UsersService {
       newClient.firstName = client.firstName;
       newClient.lastName = client.lastName;
       newClient.address = client.address;
+      newClient.age = client.age;
+      newClient.email = client.email;
       newClient.dateregistered = new Date();
       newClient.manager = manager;
       newClient.funds = funds;
 
       return await this.clientRepository.save(newClient);
     } catch (error) {
-      throw new BadRequestException('Client cannot be created');
+      throw new BadRequestException(error);
     }
   }
 

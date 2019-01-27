@@ -7,6 +7,7 @@ import { AddManagerComponent } from './add-manager/add-manager.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { AdminService } from './admin.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AdminService } from './admin.service';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    HttpClientModule,
   ],
   providers: [AdminService]
 })
