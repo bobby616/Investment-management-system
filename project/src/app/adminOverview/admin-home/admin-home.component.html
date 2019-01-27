@@ -1,0 +1,42 @@
+<div id="wrapper">
+
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand sidebar-name">
+        Hello, {{token.fullname}}
+      </li>
+      <li>
+        <a [routerLink]="['/admin/clients']">
+          <i class="material-icons sidebar-material-icons">
+            account_circle
+          </i>
+          <small class="sidebar-text">Create Client</small>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/admin/managers']">
+          <i class="material-icons sidebar-material-icons">
+            account_circle
+          </i>
+          <small class="sidebar-text">Create Manager</small>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/admin/admins']">
+          <i class="material-icons sidebar-material-icons">
+            account_circle
+          </i>
+          <small class="sidebar-text">Create Admin</small>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- /#page-content-wrapper -->
+</div>

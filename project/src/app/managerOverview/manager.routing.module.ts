@@ -30,7 +30,10 @@ const routes: Routes = [
                 data: { animation: { value: 'manager' } },
             }, */
     },
-    {path: 'clients', component: ClientComponent}
+    {path: 'clients', loadChildren: './client/client.module#ClientModule'},
+    {path: 'stock', loadChildren: '../stock/stock.module#StockModule'},
+    // {path: 'watchlist', },
+    // {path: 'history', },
     /* {
         path: 'client/:clientId', component: ClientManageComponent, children: [
             { path: '', redirectTo: 'portfolio' },

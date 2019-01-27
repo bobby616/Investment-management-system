@@ -18,4 +18,7 @@ export class ClientRegisterDTO {
 
     @IsString()
     address: string;
+
+    @IsString()
+    managerEmail: string;
 }

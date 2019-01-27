@@ -14,11 +14,8 @@ import { ClientService } from './client/client.service';
 
 @NgModule({
     declarations: [
-        HomeComponent, ClientComponent, ClientListComponent,
     ],
-     imports: [
-       // ClientModule,
-    //     ClientManageModule,
+    imports: [
         ManagerRoutingModule,
         SharedModule,
         FormsModule,

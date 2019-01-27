@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-  users: [{ name: 'Pesho', age: 22 }, { name: 'Tosho', age: 25 }]
+  
 
   constructor() { }
 

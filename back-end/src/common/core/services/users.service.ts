@@ -69,14 +69,14 @@ export class UsersService {
     }
   }
 
-  async createClient(managerId: string, client: ClientRegisterDTO): Promise<Client> {
+  async createClient(client: ClientRegisterDTO): Promise<Client> {
     const foundClient = await this.clientRepository.findOne({ email: client.email });
     if (foundClient) {
       throw new BadRequestException('Email already exist');
     }
 
     try {
-      const manager = await this.usersRepository.findOne({ id: managerId });
+      const manager = await this.usersRepository.findOne({ email: client.managerEmail });
 
       const funds = await this.fundsRepository.create();
       funds.currentamount = +client.amount;

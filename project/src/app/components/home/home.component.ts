@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,5 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  token = jwt_decode(localStorage.getItem('token')) 
-
-
+  token = jwt_decode(localStorage.getItem('token'));
 }

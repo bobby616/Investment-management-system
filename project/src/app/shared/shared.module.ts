@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from '../components/home/home.component';
 
 @NgModule({
-  declarations: [МodalComponent],
+  declarations: [МodalComponent, HomeComponent],
   imports: [CommonModule, RouterModule],
-  exports: [CommonModule, МodalComponent, RouterModule]
+  exports: [CommonModule, МodalComponent, RouterModule, HomeComponent]
 })
 export class SharedModule {}
