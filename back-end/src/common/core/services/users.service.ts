@@ -141,4 +141,23 @@ export class UsersService {
       throw new BadRequestException('No such manager');
     }
   }
+  async getManagerByClientId(clientId: string): Promise<User> {
+    try {
+      const client = await this.clientRepository.findOne({id: clientId})
+      const manager = await this.usersRepository.findOne({id: client.manager.id}) // can be optimized
+      return manager;
+    } catch (error) {
+      throw new BadRequestException('No such manager');
+    }
+  }
+
+  async getClientsByManagerId(managerId: string): Promise<Client[]> {
+    try {
+      const manager = await this.usersRepository.findOne({id: managerId})
+      const clients = await this.clientRepository.find({manager})
+      return clients;
+    } catch (error) {
+      throw new BadRequestException('No such manager');
+    }
+  }
 }
