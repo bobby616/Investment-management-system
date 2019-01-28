@@ -33,6 +33,6 @@ export class ClientManageComponent implements OnInit {
   }
 
   onBack(){
-    this.router.navigate(['manager/clients']);
+    this.router.navigate(['manager/clients', this.client.id]);
   }
 }

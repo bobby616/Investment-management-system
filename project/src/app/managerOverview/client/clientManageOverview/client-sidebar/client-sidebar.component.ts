@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { Client } from '../../models/client.model';
 import { ClientService } from '../../client.service';
 
@@ -14,10 +14,12 @@ export class ClientSidebarComponent implements OnInit {
 
 
   constructor(private readonly route: ActivatedRoute,
-    private readonly clientService: ClientService) { }
+    private readonly clientService: ClientService,
+    private readonly router: Router) { }
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
+    
     if(id){
       this.getClientByID(id);
     }
@@ -30,4 +32,7 @@ export class ClientSidebarComponent implements OnInit {
     });
   }
 
+  onBack(){
+    this.router.navigate(['manager/clients']);
+  }
 }

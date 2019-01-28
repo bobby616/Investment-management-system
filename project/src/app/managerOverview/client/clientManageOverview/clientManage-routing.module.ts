@@ -5,11 +5,11 @@ import { ClientSidebarComponent } from './client-sidebar/client-sidebar.componen
 
 const routes: Routes = [
     {
-      path: '', component: ClientSidebarComponent,
+      path: '', component: ClientManageComponent,
     },
-    {
+    /* {
       path: 'portfolio', component: ClientManageComponent,
-    },
+    }, */
     {
       path: '**',
       redirectTo: '/not-found'

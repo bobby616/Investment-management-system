@@ -1,13 +1,13 @@
-<div id="wrapper">
+<div id="wrapper" *ngIf="client">
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
         <li class="sidebar-brand sidebar-name">
-          Hello, {{token.fullname}}
+          Managing, {{client.firstName}}
         </li>
         <li>
-          <a [routerLink]="['/manager/clients', client.id , 'portfolio']">
+          <a [routerLink]="['/manager/clients', client.id]">
             <i class="material-icons sidebar-material-icons">
               attach_money
             </i>
@@ -47,11 +47,11 @@
           </a>
         </li>
         <li>
-          <a (click)="logOut()" style="cursor: pointer">
+          <a (click)="onBack()" style="cursor: pointer">
             <i class="material-icons sidebar-material-icons">
               exit_to_app
             </i>
-            <small class="sidebar-text">Logout</small>
+            <small class="sidebar-text">Back to clients</small>
           </a>
         </li>
       </ul>
