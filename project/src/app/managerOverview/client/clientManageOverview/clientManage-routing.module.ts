@@ -1,7 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ClientManageComponent } from './client-manage/client-manage.component';
-import { ClientSidebarComponent } from './client-sidebar/client-sidebar.component';
 
 const routes: Routes = [
     {

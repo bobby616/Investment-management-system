@@ -8,17 +8,15 @@ import { DataService } from 'src/app/managerOverview/client/data.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-home',
-  styleUrls: ['./home.component.css'],
-  templateUrl: './home.component.html'
+  selector: 'app-sidebar',
+  styleUrls: ['./sidebar.component.css'],
+  templateUrl: './sidebar.component.html'
 })
-export class HomeComponent {
+export class SidebarComponent {
   token: string;
   id: string;
   client: Client;
-  isClient: boolean;
-  isClientSubscription: Subscription;
-  clientIdSubscription: Subscription;
+  ClientSubscription: Subscription;
   constructor(private readonly authService: AuthenticationService,
      private readonly route: ActivatedRoute,
     private readonly clientService: ClientService,
@@ -26,36 +24,21 @@ export class HomeComponent {
     private readonly dataService: DataService) { }
 
   ngOnInit() {
-    this.isClientSubscription = this.dataService.currentData.subscribe(isClient => {this.isClient = isClient
-    console.log(isClient)})
-    this.route.url.subscribe(url =>{
-      this.id = this.route.snapshot.paramMap.get('id');
-      console.log(url);
- });
-
+    this.ClientSubscription = this.dataService.currentData.subscribe(client => {this.client = client
+    console.log(this.client)})
     this.token = jwt_decode(localStorage.getItem('token'));
-    console.log(this.id)
-    if (this.id) {
-      this.getClientByID(this.id);
-    }
   }
 
   logOut() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
-  getClientByID(id: string) {
-    this.clientIdSubscription = this.clientService.getClient(id).subscribe(
-    (client) => {
-      this.client = client;
-    });
-  }
 
   onBack(){
+    this.client = null;
     this.router.navigate(['manager/clients']);
   }
   ngOnDestroy() {
-    this.isClientSubscription.unsubscribe();
-    this.clientIdSubscription.unsubscribe();
+    this.ClientSubscription.unsubscribe();
   } 
 }
