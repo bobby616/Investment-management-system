@@ -9,13 +9,15 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminService } from './admin.service';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AdminRearrangerComponent } from './rearranger/rearranger.component';
+import { DragDropModule} from '@angular/cdk/drag-drop'
+import { ClientService } from '../managerOverview/client/client.service';
 @NgModule({
   declarations: [
-    AdminHomeComponent,
     AddClientComponent,
     AddManagerComponent,
-    AddAdminComponent
+    AddAdminComponent,
+    AdminRearrangerComponent
   ],
   imports: [
     AdminRoutingModule,
@@ -23,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     SharedModule,
     HttpClientModule,
+    DragDropModule
   ],
-  providers: [AdminService]
+  providers: [AdminService, ClientService]
 })
 export class AdminModule { }

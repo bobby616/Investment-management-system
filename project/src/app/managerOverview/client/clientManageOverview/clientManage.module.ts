@@ -11,8 +11,7 @@ import { ClientSidebarComponent } from './client-sidebar/client-sidebar.componen
 @NgModule({
     imports: [SharedModule, ClientManageRoutingModule, FormsModule, ReactiveFormsModule],
     declarations: [
-      ClientManageComponent,
-      ClientSidebarComponent
+      ClientManageComponent
     ],
     providers: [ClientService]
   })

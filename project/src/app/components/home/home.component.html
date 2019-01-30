@@ -1,4 +1,5 @@
-<div id="wrapper">
+<!--admin-->
+<div id="wrapper" *ngIf="token.role === 'admin'">
 
   <!-- Sidebar -->
   <div id="sidebar-wrapper">
@@ -7,19 +8,147 @@
         Hello, {{token.fullname}}
       </li>
       <li>
-        <a [routerLink]="['/manager']">
-          <i class="material-icons sidebar-material-icons">
-            home
-          </i>
-          <small class="sidebar-text">Home</small>
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/manager/clients']">
+        <a [routerLink]="['/admin/clients']">
           <i class="material-icons sidebar-material-icons">
             account_circle
           </i>
-          <small class="sidebar-text">Clients</small>
+          <small class="sidebar-text">Create Client</small>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/admin/managers']">
+          <i class="material-icons sidebar-material-icons">
+            account_circle
+          </i>
+          <small class="sidebar-text">Create Manager</small>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/admin/admins']">
+          <i class="material-icons sidebar-material-icons">
+            account_circle
+          </i>
+          <small class="sidebar-text">Create Admin</small>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/admin/rearrange']">
+          <i class="material-icons sidebar-material-icons">
+            shuffle
+          </i>
+          <small class="sidebar-text">Rearrange</small>
+        </a>
+      </li>
+      <li>
+          <a (click)="logOut()" style="cursor: pointer">
+            <i class="material-icons sidebar-material-icons">
+              exit_to_app
+            </i>
+            <small class="sidebar-text">Logout</small>
+          </a>
+        </li>
+    </ul>
+  </div>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- /#page-content-wrapper -->
+</div>
+
+<!-- manager -->
+<div id="wrapper" *ngIf="token.role === 'manager' && !isClient">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <li class="sidebar-brand sidebar-name">
+          Hello, {{token.fullname}}
+        </li>
+        <li>
+          <a [routerLink]="['/manager']">
+            <i class="material-icons sidebar-material-icons">
+              home
+            </i>
+            <small class="sidebar-text">Home</small>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/manager/clients']">
+            <i class="material-icons sidebar-material-icons">
+              account_circle
+            </i>
+            <small class="sidebar-text">Clients</small>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/manager/stock']">
+            <i class="material-icons sidebar-material-icons">
+              view_list
+            </i>
+            <small class="sidebar-text">Stock</small>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/watchlist']">
+            <i class="material-icons sidebar-material-icons">
+              remove_red_eye
+            </i>
+            <small class="sidebar-text">Watchlist</small>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/history']">
+            <i class="material-icons sidebar-material-icons">
+              history
+            </i>
+            <small class="sidebar-text">History</small>
+          </a>
+        </li>
+        <li>
+          <a (click)="logOut()" style="cursor: pointer">
+            <i class="material-icons sidebar-material-icons">
+              exit_to_app
+            </i>
+            <small class="sidebar-text">Logout</small>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+  
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+    <!-- /#page-content-wrapper -->
+  </div>
+  
+<!--client-->
+<div id="wrapper" *ngIf="isClient">
+
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand sidebar-name">
+        Managing, {{client.firstName}}
+      </li>
+      <li>
+        <a [routerLink]="['/manager/clients', client.id]">
+          <i class="material-icons sidebar-material-icons">
+            attach_money
+          </i>
+          <small class="sidebar-text">Portfolio</small>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/manager/clients', client.id , '/positions']">
+          <i class="material-icons sidebar-material-icons">
+            account_circle
+          </i>
+          <small class="sidebar-text">Positions</small>
         </a>
       </li>
       <li>
@@ -47,11 +176,11 @@
         </a>
       </li>
       <li>
-        <a (click)="logOut()" style="cursor: pointer">
+        <a (click)="onBack()" style="cursor: pointer">
           <i class="material-icons sidebar-material-icons">
             exit_to_app
           </i>
-          <small class="sidebar-text">Logout</small>
+          <small class="sidebar-text">Back to Manager overview</small>
         </a>
       </li>
     </ul>
@@ -64,3 +193,4 @@
   </div>
   <!-- /#page-content-wrapper -->
 </div>
+

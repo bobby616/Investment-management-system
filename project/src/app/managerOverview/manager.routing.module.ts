@@ -2,17 +2,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '../components/home/home.component';
-import { ClientListComponent } from './client/components/clinet-list.component.ts/client-list.component';
-import { Client } from './client/models/client.model';
-import { ClientComponent } from './client/components/client-component/client.component';
 
 const routes: Routes = [
     {
-    path: '', component: HomeComponent,
+        path: '', component: HomeComponent,
+        children: [
+            { path: 'clients', loadChildren: './client/client.module#ClientModule' },
+            { path: 'stock', loadChildren: '../stock/stock.module#StockModule' },]
     },
-    {path: 'clients', loadChildren: './client/client.module#ClientModule'},
-    {path: 'stock', loadChildren: '../stock/stock.module#StockModule'},
-    
+
+
     /* {
         path: 'client/:clientId', component: ManageClientComponent, children: [
             { path: '', redirectTo: 'portfolio' },

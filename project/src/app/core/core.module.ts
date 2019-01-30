@@ -7,6 +7,7 @@ import { NotificatorService } from './notificator.service';
 import { AuthService } from '../auth/auth.service';
 import { SearchService } from './search.service';
 import { AppConfig } from '../common/app.config';
+import { DataService } from '../managerOverview/client/data.service';
 
 @NgModule({
   providers: [
@@ -17,7 +18,8 @@ import { AppConfig } from '../common/app.config';
     AuthService,
     SearchService,
     AuthRouteActivatorService,
-    AnonymousRouteActivatorService
+    AnonymousRouteActivatorService,
+    DataService
   ]
 })
 export class CoreModule {

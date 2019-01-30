@@ -1,6 +1,9 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, Output, EventEmitter } from '@angular/core';
 import { Client } from '../../models/client.model';
 import { ClientService } from '../../client.service';
+import { Router } from '@angular/router';
+import { DataService } from '../../data.service';
+import { Subscription } from 'rxjs';
 
 @Component(
     {
@@ -18,9 +21,13 @@ export class ClientListComponent implements OnInit {
     errorMessage = '';
     filteredClients: Client[] = [];
     clients: Client[] = [];
-
+    isClient = true;
+    isClientSubscription: Subscription;
+    clientSubscription: Subscription;
     constructor(
-        private clientService: ClientService) {
+        private readonly clientService: ClientService,
+        private readonly router: Router,
+        private readonly dataService: DataService) {
 
     }
 
@@ -50,7 +57,8 @@ export class ClientListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.clientService.getClients().subscribe(
+        this.isClientSubscription = this.dataService.currentData.subscribe(isClient => this.isClient = isClient)
+        this.clientSubscription = this.clientService.getClients().subscribe(
             clients => {
                 this.clients = clients;
                 this.filteredClients = this.clients;
@@ -59,4 +67,12 @@ export class ClientListComponent implements OnInit {
         );
     }
 
+    ngOnDestroy(): void {
+        this.isClientSubscription.unsubscribe();
+        this.clientSubscription.unsubscribe();
+    }
+    manage(id): void {
+        this.dataService.changeIsClient(this.isClient);
+        this.router.navigateByUrl(`/manager/clients/${id}`);
+    }   
 }

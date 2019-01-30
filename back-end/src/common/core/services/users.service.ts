@@ -116,8 +116,9 @@ export class UsersService {
     return null;
   }
 
-  async getAllUsers() {
-    return this.usersRepository.find({});
+  async getAllManagers() {
+    const role = await this.roleRepository.findOne({rolename: 'manager'})
+    return await this.usersRepository.find({role: role});
   }
 
   async getAllClients() {

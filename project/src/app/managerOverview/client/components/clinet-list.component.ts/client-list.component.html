@@ -46,7 +46,7 @@
               <td>{{ client.funds.currentamount | currency:'USD':'symbol':'1.2-2'}}</td>
               <td>TO DO: Profit/Loss</td>
               <td>
-                <a [routerLink]="['/manager/clients', client.id]">
+                <a (click)="manage(client.id)" >
                   <button type="button" class="btn btn-success">Manage</button>
                 </a>
                 </td>

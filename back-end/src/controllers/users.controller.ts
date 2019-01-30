@@ -19,7 +19,7 @@ export class UsersController {
   /* @Roles('admin')
   @UseGuards(AuthGuard(), RolesGuard) */
   all() {
-    return this.usersService.getAllUsers();
+    return this.usersService.getAllManagers();
   }
 
   @Get('/clients')

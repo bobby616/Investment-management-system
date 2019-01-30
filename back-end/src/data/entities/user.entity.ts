@@ -23,8 +23,8 @@ export class User {
   @ManyToOne(type => Role, role => role.users, { eager: true })
   role: Role;
 
-  @OneToMany(type => Client, client => client.manager)
-  clients: Promise<Client[]>;
+  @OneToMany(type => Client, client => client.manager, { eager: true })
+  clients: Client[];
 
   @Column({ default: '' })
   fullname: string;

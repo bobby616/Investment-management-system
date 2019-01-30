@@ -7,6 +7,7 @@ import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AdminModel } from './models/admin-model';
 import { ManagerModel } from './models/manager-model';
+import { ManagerDTO } from './models/manager-dto';
 
 @Injectable()
 export class AdminService{
@@ -41,5 +42,8 @@ export class AdminService{
         this.http.post(`${this.app.apiUrl}/users/createManager`, manager).subscribe((data) => {
             console.log(data);
         });
+    }
+    public getManagers(): Observable<ManagerDTO[]> {
+        return this.http.get<ManagerDTO[]>(`${this.app.apiUrl}/users/all`);
     }
 }
