@@ -34,15 +34,12 @@
           <tbody>
             <tr *ngFor='let client of filteredClients'>
               <td>
-                {{client.id}}
-              </td>
-              <td>
                   {{ client.firstName }}
               </td>
               <td>{{ client.lastName }}</td>
               <td>{{ client.age }}</td>
               <td>{{ client.address }}</td>
-              <td>{{ client.dateregistered }}</td>
+              <td>{{ client.dateregistered | date }}</td>
               <td>{{ client.funds.currentamount | currency:'USD':'symbol':'1.2-2'}}</td>
               <td>TO DO: Profit/Loss</td>
               <td>

@@ -30,13 +30,13 @@ export class FundsService {
             amount: modal.total
         };
         this.clientService.getClient(clientCred.id).subscribe(
-            (response: Client) => {
-                if (response.funds.currentamount < clientCred.amount) {
-                    return this.notificationService.error('Transaction failed due to not enough money',);
+            (currentClient: Client) => {
+                if (currentClient.funds.currentamount < clientCred.amount) {
+                    return this.notificationService.error('Transaction failed due to not sufficient funds',);
                 }
                 this.fundsHttpService.substractFund(clientCred).subscribe();
-                this.notificationService.success('Payed successfully');
-                this.user.next(response);
+                console.log('wewewe'+ currentClient);
+                this.user.next(currentClient);
             }
         );
     }

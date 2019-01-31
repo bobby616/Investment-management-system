@@ -10,6 +10,7 @@ import { UserInfoDTO } from '../models/user-info.model';
 import { DataService } from '../managerOverview/client/data.service';
 import { Client } from '../managerOverview/client/models/client.model';
 import { take } from 'rxjs/operators';
+import { ClientService } from '../managerOverview/client/client.service';
 
 @Injectable()
 export class OrdersService {
@@ -21,6 +22,7 @@ export class OrdersService {
         private stockService: StocksService,
         private fundsService: FundsService,
         private readonly dataService: DataService,
+        private clientService: ClientService,
     ) { }
 
     clientToManageId = this.dataService.currentData.subscribe(client => {
@@ -37,13 +39,13 @@ export class OrdersService {
                 companyId: companyInfo.id,
                 direction: result.direction
             };
-            /* this.orderHttpService.createOrder(order).subscribe(); */
             this.fundsService.user.subscribe((response: Client) => {
                 if (Object.keys(response).length !== 0 && response.funds.currentamount > result.total) {
-                    this.orderHttpService.createOrder(order).pipe(ta,ke(1)).subscribe();
+                    this.clientService
+                    this.orderHttpService.createOrder(order).pipe(take(1)).subscribe();
                     setTimeout(() => {
                         this.notificationService.success('Order is successful');
-                    }, 3500);
+                    }, 1000);
                 }
             });
         });

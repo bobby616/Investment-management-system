@@ -40,7 +40,7 @@ export class FundsService {
 
     }
     async substractFund(fundDTO: AddSubstractFundDTO) {
-        const clientFound = await this.clientRepository.findOne({ id: fundDTO.id });
+        const clientFound: Client = await this.clientRepository.findOne({where: { id: fundDTO.id }});
 
         if (!clientFound) {
             throw new HttpException('Fund not found!', HttpStatus.NOT_FOUND);
@@ -49,9 +49,8 @@ export class FundsService {
             throw new Error('Current amount is less than the amount you want to extract');
         }
 
-        clientFound.funds.currentamount -= fundDTO.amount;
-        return await this.clientRepository.save(clientFound);
-        // return await this.fundRepository.update({ id: fundDTO.id }, { currentamount: foundFund.currentamount - fundDTO.amount });
+        const newfunds = clientFound.funds.currentamount - fundDTO.amount;
+        return await this.fundRepository.update({ id: clientFound.funds.id }, { currentamount: newfunds });
     }
 
     async currentFund(client_id: string) {

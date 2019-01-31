@@ -6,12 +6,15 @@ import { ClientManageRoutingModule } from './clientManage-routing.module';
 import { ClientManageComponent } from './client-manage/client-manage.component';
 import { StockComponent } from 'src/app/stock/component/stock.component';
 import { StockModule } from 'src/app/stock/stock.module';
+import { ClientPositionsComponent } from './client-positions/client-positions.component';
 
 
 @NgModule({
     imports: [SharedModule, ClientManageRoutingModule, FormsModule, ReactiveFormsModule, StockModule],
     declarations: [
       ClientManageComponent,
+      ClientPositionsComponent,
+      
     ],
     providers: [ClientService]
   })
