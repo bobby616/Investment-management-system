@@ -1,6 +1,6 @@
 export class Client{
     id: string;
-    funds: object;
+    funds: any;
     firstName: string;
     lastName: string;
     age: number;

@@ -24,13 +24,13 @@ export class OrderService {
         private readonly clientRepository: Repository<Client>
     ) { }
 
-    async createOrder(clientId: string, order: OrderDTO) {
-        const foundUser: Client = await this.clientRepository.findOne({ where: { id: clientId } });
+    async createOrder(order: OrderDTO) {
+        const foundUser: Client = await this.clientRepository.findOne({ where: { email: order.clientEmail } });
         if (!foundUser) {
             throw new HttpException('Client not found!', HttpStatus.NOT_FOUND);
         }
 
-        const foundCompany: Company = await this.companyRepository.findOne({ where: { id: order.companyId } });
+        const foundCompany: Company = await this.companyRepository.findOneOrFail({ where: { id: order.companyId } });
         if (!foundCompany) {
             throw new HttpException('Company not found!', HttpStatus.NOT_FOUND);
         }
@@ -39,20 +39,17 @@ export class OrderService {
         if (!foundStatus) {
             throw new HttpException('Status not found!', HttpStatus.NOT_FOUND);
         }
-
-        const amountNeeded = order.buyPrice * order.units;
+        const amountNeeded = order.openPrice * order.units;
         if (amountNeeded <= foundUser.funds.currentamount) {
             try {
                 const createOrder: Order = await this.orderRepository.create();
                 createOrder.opendate = order.openDate;
-                createOrder.closedate = order.closeDate;
-                createOrder.buyprice = order.buyPrice;
-                createOrder.sellprice = order.sellPrice;
+                createOrder.openPrice = order.openPrice;
                 createOrder.units = order.units;
                 createOrder.client = Promise.resolve(foundUser);
                 createOrder.status = foundStatus;
+                createOrder.direction = order.direction;
                 createOrder.company = Promise.resolve(foundCompany);
-
                 await this.orderRepository.save(createOrder);
             } catch (error) {
                 throw new HttpException('Cannot create order', HttpStatus.BAD_REQUEST);
@@ -82,12 +79,18 @@ export class OrderService {
         return foundOrder;
     }
 
-    async closeOrder(id: string, orderClose?: CloseOrderDTO): Promise<Order> {
+    async closeOrder(closeOrder: CloseOrderDTO): Promise<Order> {
         try {
-            const order: Order = await this.orderRepository.findOne({ id })
-            order.status = await this.statusRepository.findOne({ where: { statusname: 'closed' } })
-            /* order.closedate = new Date();
-            order.sellprice = orderClose.sellPrice; */
+            const order: Order = await this.orderRepository.findOne({ id: closeOrder.id });
+            order.closePrice = closeOrder.closePrice;
+            order.status = await this.statusRepository.findOne({ where: { statusname: 'closed' } });
+            let result = 0;
+            if (order.direction === 'Buy') {
+                result = +order.units * +order.openPrice - (+order.closePrice);
+            } else {
+                result = +order.closePrice - (+order.units * +order.openPrice);
+            }
+            order.result = result;
             return await this.orderRepository.save(order);
         } catch (error) {
             throw new HttpException('Orders not found!', HttpStatus.NOT_FOUND);

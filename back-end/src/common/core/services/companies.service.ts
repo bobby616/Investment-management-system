@@ -1,5 +1,5 @@
 import { Industry } from '../../../data/entities/industry.entity';
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Company } from 'src/data/entities/company.entity';
 import { Repository } from 'typeorm';
@@ -94,5 +94,14 @@ export class CompaniesService {
     }
     async getAllCompanies() {
         return await this.companyRepository.find({});
+    }
+
+    async getCompany(companySymbol) {
+        try {
+            const company = await this.companyRepository.findOne({ where: { abbr: companySymbol.abbr } });
+            return company;
+        } catch (error) {
+            throw new HttpException('Company not found!', HttpStatus.NOT_FOUND);
+        }
     }
 }

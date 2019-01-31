@@ -1,9 +1,10 @@
-<div>
-    <ag-grid-angular 
-    id="myGrid"
-    class="ag-theme-blue"
-    [rowData]="rowData | async"
-    [columnDefs]="columnDefs"
-    >
+<ag-grid-angular 
+style="height:600px; font-size: 22px" class="ag-theme-blue"
+[gridOptions]="gridOptions"
+[rowSelection]="rowSelection"
+[floatingFilter]="true"
+[defaultColDef]="defaultColDef"
+(rowClicked)="onRowSelected($event)"
+>
 </ag-grid-angular>
-</div>
+

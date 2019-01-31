@@ -40,9 +40,10 @@ export class PricesService {
     for (const company of companies) {
       try {
         const price = await this.priceRepository.findOne({ where: { company }, order: { opendate: 'DESC' } });
+
         result.push(price);
       } catch (e) {
-        // Log error if necessary
+        throw new BadRequestException('Price not found');
       }
     }
 

@@ -1,15 +1,48 @@
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">
-      <ng-content select=".title"></ng-content>
-    </h4>
-  </div>
+<div class="header" mat-dialog-title>
+  <span>{{this.data.name}}</span>
+</div>
 
-  <div class="modal-body">
-    <ng-content select=".body"></ng-content>
-  </div>
+<br>
+<mat-dialog-content class="mat-typography">
+  <div class="example-container">
 
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="this.modal.close()">Close</button>
+    <form class="my-form">
+      <mat-form-field>
+        <mat-select [(value)]="price" name="price" placeholder="Price" required>
+          <mat-option value="{{this.buyPrice}}">Buy: {{this.buyPrice | currency}}</mat-option>
+          <mat-option value="{{this.sellPrice}}">Sell: {{this.sellPrice | currency}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br>
+      <mat-form-field>
+        <input matInput [(ngModel)]="this.units" name="units" type="text" min="0" maxlength="10" placeholder="Units"
+          required OnlyNumber="true">
+      </mat-form-field>
+    </form>
+
+    <br>
+    <label>
+      <h2>Total</h2>
+    </label>
+    <h3>{{units*price | currency}}</h3>
   </div>
-</ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button [mat-dialog-close]>Cancel</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="getDialogInfo()">Proceed</button>
+</mat-dialog-actions>
+
+
+<!-- <h1 mat-dialog-title>Hi putkaaaaaaaaasdfaefqewfqwefqf}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?ertf</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div> -->

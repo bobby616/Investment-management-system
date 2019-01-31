@@ -47,4 +47,10 @@ export class StocksController {
   async getCompaniesTimesListed(@Param('id') id: string): Promise<number> {
     return this.companiesService.getCompanyTimesListed(id);
   }
+
+  // shitty, I know but I didn't have time
+  @Post('/abbreviature')
+    getCompany(@Body() abbr: string) {
+            return this.companiesService.getCompany(abbr);
+    }
 }
