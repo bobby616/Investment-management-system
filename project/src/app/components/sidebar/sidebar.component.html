@@ -59,7 +59,7 @@
 </div>
 
 <!-- manager -->
-<div id="wrapper" *ngIf="token.role === 'manager' && !isClient">
+<div id="wrapper" *ngIf="token.role === 'manager' && !client">
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
@@ -127,7 +127,7 @@
   </div>
   
 <!--client-->
-<div id="wrapper" *ngIf="isClient">
+<div id="wrapper" *ngIf="client">
 
   <!-- Sidebar -->
   <div id="sidebar-wrapper">

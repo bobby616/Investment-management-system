@@ -21,9 +21,9 @@ export class ClientListComponent implements OnInit {
     errorMessage = '';
     filteredClients: Client[] = [];
     clients: Client[] = [];
-    isClient = true;
+    client: Client;
     isClientSubscription: Subscription;
-    clientSubscription: Subscription;
+    clientsSubscription: Subscription;
     constructor(
         private readonly clientService: ClientService,
         private readonly router: Router,
@@ -57,8 +57,8 @@ export class ClientListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.isClientSubscription = this.dataService.currentData.subscribe(isClient => this.isClient = isClient)
-        this.clientSubscription = this.clientService.getClients().subscribe(
+        this.isClientSubscription = this.dataService.currentData.subscribe(isClient => this.client = isClient)
+        this.clientsSubscription = this.clientService.getClients().subscribe(
             clients => {
                 this.clients = clients;
                 this.filteredClients = this.clients;
@@ -68,11 +68,16 @@ export class ClientListComponent implements OnInit {
     }
 
     ngOnDestroy(): void {
-        this.isClientSubscription.unsubscribe();
-        this.clientSubscription.unsubscribe();
+        this.isClientSubscription.unsubscribe(); // unsubscribe of undefined when (click)="backToManager"
+        this.clientsSubscription.unsubscribe();
     }
     manage(id): void {
-        this.dataService.changeIsClient(this.isClient);
-        this.router.navigateByUrl(`/manager/clients/${id}`);
-    }   
+        this.clientService.getClient(id).subscribe(client => {
+            this.client = client;
+            setTimeout(() => {
+                this.dataService.changeIsClient(this.client);
+                this.router.navigateByUrl(`/manager/clients/${id}`);
+               }, 10)
+        })
+    }
 }
