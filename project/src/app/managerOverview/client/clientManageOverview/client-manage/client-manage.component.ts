@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../../models/client.model';
-import { ClientService } from '../../client.service';
+import { DataService } from '../../data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-client-manage',
@@ -11,28 +12,26 @@ import { ClientService } from '../../client.service';
 export class ClientManageComponent implements OnInit {
 
   client: Client | undefined;
-
+  clientSubscription: Subscription
   constructor(private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly clientService: ClientService) { }
+    private readonly dataService: DataService) { }
 
   
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    if(id){
-      this.getClientByID(id);
+    this.clientSubscription = this.dataService.currentData.subscribe(client => {
+      this.client = client
+    })
+  }
+  ngOnDestroy() {
+    if(this.clientSubscription){
+      this.clientSubscription.unsubscribe();
     }
   }
-
-  getClientByID(id: string) {
-    this.clientService.getClient(id).subscribe(
-    (client) => {
-      this.client = client;
-    });
-  }
-
   onBack(){
     this.router.navigate(['manager/clients', this.client.id]);
   }
+
+
 }

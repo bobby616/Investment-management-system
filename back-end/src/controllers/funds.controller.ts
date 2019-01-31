@@ -45,10 +45,7 @@ export class FundsController {
     }
 
     @Post('/substract')
-    async substractToFund(@Body(new ValidationPipe({
-        transform: true,
-        whitelist: true,
-    })) fund: AddSubstractFundDTO) {
+    async substractToFund(@Body() fund: AddSubstractFundDTO) {
         return this.fundsService.substractFund(fund);
     }
 

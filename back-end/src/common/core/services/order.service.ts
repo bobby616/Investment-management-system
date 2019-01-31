@@ -25,7 +25,8 @@ export class OrderService {
     ) { }
 
     async createOrder(order: OrderDTO) {
-        const foundUser: Client = await this.clientRepository.findOne({ where: { email: order.clientEmail } });
+        const foundUser: Client = await this.clientRepository.findOne({ where: { id: order.clientId } });
+        console.log(foundUser)
         if (!foundUser) {
             throw new HttpException('Client not found!', HttpStatus.NOT_FOUND);
         }
@@ -50,6 +51,7 @@ export class OrderService {
                 createOrder.status = foundStatus;
                 createOrder.direction = order.direction;
                 createOrder.company = Promise.resolve(foundCompany);
+                console.log(createOrder)
                 await this.orderRepository.save(createOrder);
             } catch (error) {
                 throw new HttpException('Cannot create order', HttpStatus.BAD_REQUEST);

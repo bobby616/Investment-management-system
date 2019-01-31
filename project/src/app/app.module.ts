@@ -23,7 +23,6 @@ import { ManagerGuard } from './core/manager-guard';
 import { RoleGuard } from './core/route-guards/route-guard.service';
 import { MatIconModule } from '@angular/material';
 
-
 @NgModule({
   declarations: [
     AppComponent,

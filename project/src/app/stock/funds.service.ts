@@ -1,25 +1,32 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { NotificatorService } from '../core/notificator.service';
 import { FundsHttpService } from './fundsHTTP.service';
 import { ClientService } from '../managerOverview/client/client.service';
 import { ModalDTO } from '../models/modal.model';
 import { UserInfoDTO } from '../models/user-info.model';
 import { Client } from '../managerOverview/client/models/client.model';
+import { DataService } from '../managerOverview/client/data.service';
 
 @Injectable()
 export class FundsService {
     public user = new BehaviorSubject<object>({});
+    clientId: string;
+    
     constructor(
         private notificationService: NotificatorService,
         private fundsHttpService: FundsHttpService,
         private clientService: ClientService,
+        private readonly dataService: DataService,
     ) { }
 
+    clientToManageId = this.dataService.currentData.subscribe(client => {
+        this.clientId = client.id;
+    });
+
     substractFund(modal: ModalDTO) {
-        // to do to do to do
         const clientCred = {
-            id: localStorage.getItem('clientId'),
+            id: this.clientId,
             amount: modal.total
         };
         this.clientService.getClient(clientCred.id).subscribe(

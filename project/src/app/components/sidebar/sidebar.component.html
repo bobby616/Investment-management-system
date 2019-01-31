@@ -144,7 +144,7 @@
         </a>
       </li>
       <li>
-        <a [routerLink]="['/manager/clients', client.id , '/positions']">
+        <a [routerLink]="['/manager/clients', client.id , 'positions']">
           <i class="material-icons sidebar-material-icons">
             account_circle
           </i>
@@ -152,7 +152,7 @@
         </a>
       </li>
       <li>
-        <a [routerLink]="['/manager/stock']">
+        <a [routerLink]="['/manager/clients', client.id, 'stock']">
           <i class="material-icons sidebar-material-icons">
             view_list
           </i>
@@ -160,19 +160,11 @@
         </a>
       </li>
       <li>
-        <a [routerLink]="['/watchlist']">
+        <a [routerLink]="['/watchlist/clients', client.id, 'watchlist']">
           <i class="material-icons sidebar-material-icons">
             remove_red_eye
           </i>
           <small class="sidebar-text">Watchlist</small>
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/history']">
-          <i class="material-icons sidebar-material-icons">
-            history
-          </i>
-          <small class="sidebar-text">History</small>
         </a>
       </li>
       <li>

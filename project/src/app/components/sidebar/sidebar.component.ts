@@ -24,8 +24,7 @@ export class SidebarComponent {
     private readonly dataService: DataService) { }
 
   ngOnInit() {
-    this.ClientSubscription = this.dataService.currentData.subscribe(client => {this.client = client
-    console.log(this.client)})
+    this.ClientSubscription = this.dataService.currentData.subscribe(client => {this.client = client})
     this.token = jwt_decode(localStorage.getItem('token'));
   }
 

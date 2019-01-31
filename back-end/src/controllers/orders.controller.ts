@@ -19,10 +19,7 @@ export class OrdersController {
     ) { }
 
     @Post('/create')
-    async createOrder(@Body(new ValidationPipe({
-        transform: true,
-        whitelist: true,
-    })) order: OrderDTO) {
+    async createOrder(@Body() order: OrderDTO) {
         return this.ordersService.createOrder(order);
     }
 

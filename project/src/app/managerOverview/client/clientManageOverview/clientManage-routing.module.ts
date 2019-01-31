@@ -1,14 +1,15 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ClientManageComponent } from './client-manage/client-manage.component';
+import { StockComponent } from 'src/app/stock/component/stock.component';
 
 const routes: Routes = [
     {
       path: '', component: ClientManageComponent,
     },
-    /* {
-      path: 'portfolio', component: ClientManageComponent,
-    }, */
+    {
+      path: 'stock', component: StockComponent,
+    },
     {
       path: '**',
       redirectTo: '/not-found'

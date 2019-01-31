@@ -1,5 +1,4 @@
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { HomeComponent } from './components/home/home.component';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ServerErrorComponent } from './components/server-error/server-errror.component';

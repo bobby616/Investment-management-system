@@ -4,6 +4,6 @@ export class OrderDTO {
     openPrice: number;
     units: number;
     companyId: string;
-    clientEmail: string;
+    clientId: string;
     direction: string;
 }

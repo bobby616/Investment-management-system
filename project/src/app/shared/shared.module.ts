@@ -6,9 +6,10 @@ import { MatDialogModule, MatSelectModule, MatInputModule } from '@angular/mater
 import { FormsModule } from '@angular/forms';
 import { StocksService } from '../stock/stock.service';
 import { FundsService } from '../stock/funds.service';
+import { SidebarComponent } from '../components/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [ModalComponent],
+  declarations: [ModalComponent, SidebarComponent],
   imports: [
     CommonModule, 
     RouterModule, 
@@ -17,6 +18,6 @@ import { FundsService } from '../stock/funds.service';
     MatDialogModule,
     MatInputModule],
     providers: [],
-  exports: [CommonModule, ModalComponent, RouterModule]
+  exports: [CommonModule, ModalComponent, RouterModule, SidebarComponent]
 })
 export class SharedModule {}

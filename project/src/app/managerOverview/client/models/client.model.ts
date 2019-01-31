@@ -7,5 +7,4 @@ export class Client{
     address: string;
     dateregistered: Date;
     email: string;
-
 }
