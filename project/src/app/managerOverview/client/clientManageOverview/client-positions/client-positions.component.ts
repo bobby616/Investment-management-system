@@ -20,6 +20,7 @@ export class ClientPositionsComponent implements OnInit {
   public gridOptions: GridOptions;
   client: Client | undefined;
   clientSubscription: Subscription;
+  private overlayNoRowsTemplate;
 
   private columnDefs = [
     { headerName: 'Symbol', field: 'symbol', sortable: true, },
@@ -38,7 +39,11 @@ export class ClientPositionsComponent implements OnInit {
     private orderHTTPService: OrdersHttpService,
     private readonly dataService: DataService,
     private storageService: StorageService,
-  ) { }
+  ) {
+    this.overlayNoRowsTemplate = "<span>There are no active positions for this client</span>";
+  }
+
+
   ngOnInit() {
     this.clientSubscription = this.dataService.currentData.subscribe(client => {
       this.client = client;
@@ -84,8 +89,8 @@ export class ClientPositionsComponent implements OnInit {
           direction: event.data.direction,
           companyId: '',
           closePrice: '',
-      };
-      this.orderService.closeOrder(closeOrder, event.data.symbol);
+        };
+        this.orderService.closeOrder(closeOrder, event.data.symbol);
       }
     });
   }
