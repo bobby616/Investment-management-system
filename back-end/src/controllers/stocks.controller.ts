@@ -47,4 +47,9 @@ export class StocksController {
   async getCompaniesTimesListed(@Param('id') id: string): Promise<number> {
     return this.companiesService.getCompanyTimesListed(id);
   }
+
+  @Get('/company/:id')
+    getCompanyById(@Param('id') id: string): Promise<Company> {
+      return this.companiesService.getCompanyById(id)
+    }
 }
