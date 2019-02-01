@@ -48,6 +48,10 @@ export class StocksController {
     return this.companiesService.getCompanyTimesListed(id);
   }
 
+  @Get('/company/:id')
+    getCompanyById(@Param('id') id: string): Promise<Company> {
+      return this.companiesService.getCompanyById(id)
+    }
   // shitty, I know but I didn't have time
   @Post('/abbreviature')
     getCompany(@Body() abbr: string) {

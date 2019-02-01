@@ -12,7 +12,7 @@ export interface EnvConfig {
 export class ConfigService {
   private readonly envConfig: EnvConfig;
 
-  constructor(filePath: string = null) {
+  constructor(filePath: string = `C:/Users/mitak/Desktop/mitko js/ticktelerik/back-end/src/config/.env`) {
     let config;
     if (filePath) {
       config = dotenv.parse(fs.readFileSync(filePath));

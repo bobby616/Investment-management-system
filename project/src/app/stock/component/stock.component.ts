@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { RequesterService } from 'src/app/core/requester.service';
+import { AppConfig } from 'src/app/common/app.config';
+import { CompanyService } from 'src/app/user/services/company.service';
+import { Router } from '@angular/router';
 import { NotificatorService } from 'src/app/core/notificator.service';
 import { StockDTO } from 'src/app/models/stock.dto';
 import { GridOptions } from 'ag-grid-community';

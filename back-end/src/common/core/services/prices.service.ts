@@ -12,7 +12,7 @@ export class PricesService {
     private readonly priceRepository: Repository<Price>,
     @InjectRepository(Company)
     private readonly companyRepository: Repository<Company>,
-) { }
+  ) { }
 
 async getCompanyPrices(id: string, lastN: number, startdate?: Date, enddate?: Date): Promise<Price[]> {
   const company = await this.companyRepository.findOne({ id });
@@ -32,6 +32,11 @@ async getCompanyPrices(id: string, lastN: number, startdate?: Date, enddate?: Da
 
   return [await this.priceRepository.findOne({ where: { company }, order: { opendate: 'DESC' } })];
 }
+
+  async getPricesByCompany(id: string): Promise<Price[]> {
+    const company = await this.companyRepository.findOne({ id });
+    return await this.priceRepository.find({ where: { company }, order: { opendate: 'ASC' }, take: 50 });
+  }
 
   async getLastPricePerCompany(): Promise<Price[]> {
     const companies = await this.companyRepository.find({});

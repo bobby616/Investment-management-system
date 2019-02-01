@@ -23,9 +23,9 @@ export class Client {
   @ManyToOne(type => User, user => user.clients)
   manager: User;
 
-  @OneToOne(type => Watchlist, watchlist => watchlist.client)
+  @OneToOne(type => Watchlist, watchlist => watchlist.client, {eager: true})
   @JoinColumn()
-  watchlist: Promise<Watchlist>;
+  watchlist: Watchlist;
 
   @OneToOne(type => Funds, funds => funds.client, { eager: true})
   @JoinColumn()
@@ -49,6 +49,6 @@ export class Client {
   @Column({ unique: true })
   email: string;
 
-  @OneToMany(type => Order, order => order.client)
-  orders: Promise<Order[]>;
+  @OneToMany(type => Order, order => order.client, {eager: true})
+  orders: Order[];
 }

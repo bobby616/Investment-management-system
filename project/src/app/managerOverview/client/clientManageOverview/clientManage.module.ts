@@ -9,7 +9,7 @@ import { StockModule } from 'src/app/stock/stock.module';
 import { ClientPositionsComponent } from './client-positions/client-positions.component';
 import { CloseOrderModalComponent } from './client-positions/client-positions-modal/close-order-modal.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { MatSelectModule, MatDialogModule, MatInputModule } from '@angular/material';
+import { MatSelectModule, MatDialogModule, MatInputModule, MatTableModule } from '@angular/material';
 import { StocksService } from 'src/app/stock/stock.service';
 import { FundsService } from 'src/app/stock/funds.service';
 import { FundsHttpService } from 'src/app/stock/fundsHTTP.service';
@@ -26,6 +26,7 @@ import { OrdersService } from 'src/app/stock/orders.service';
     MatSelectModule,
     MatDialogModule,
     MatInputModule,
+    MatTableModule,
     AgGridModule.withComponents([ClientPositionsComponent])],
   declarations: [
     ClientManageComponent,

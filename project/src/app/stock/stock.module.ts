@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StockComponent } from './component/stock.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { ChartComponent } from '../managerOverview/chart-component/chart.component';
 import { StocksService } from './stock.service';
 import { FundsService } from './funds.service';
 import { FundsHttpService } from './fundsHTTP.service';
@@ -14,7 +15,7 @@ import { ClientService } from '../managerOverview/client/client.service';
 import { ModalComponent } from '../shared/modal/modal.component';
 
 @NgModule({
-  declarations: [StockComponent],
+  declarations: [StockComponent, ChartComponent],
   imports: [
     CommonModule,
     SharedModule, StockRoutingModule, FormsModule, ReactiveFormsModule,

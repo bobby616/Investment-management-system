@@ -5,7 +5,6 @@ import { ClientListComponent } from './components/clinet-list.component.ts/clien
 import { ClientComponent } from './components/client-component/client.component';
 import { ClientService } from './client.service';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatSelectModule, MatInputModule, MatDialogModule } from '@angular/material';
 
 @NgModule({
     imports: [SharedModule, ClientRoutingModule, FormsModule, ReactiveFormsModule],

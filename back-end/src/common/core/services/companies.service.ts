@@ -96,6 +96,9 @@ export class CompaniesService {
         return await this.companyRepository.find({});
     }
 
+    async getCompanyById(id) {
+        return await this.companyRepository.findOne({id})
+    }
     async getCompany(companySymbol) {
         try {
             const company = await this.companyRepository.findOne({ where: { abbr: companySymbol.abbr } });

@@ -24,7 +24,7 @@ export class ClientListComponent implements OnInit {
     filteredClients: Client[] = [];
     clients: Client[] = [];
     client: Client;
-    isClientSubscription: Subscription;
+    ClientSubscription: Subscription;
     clientsSubscription: Subscription;
     constructor(
         private readonly clientService: ClientService,
@@ -60,7 +60,7 @@ export class ClientListComponent implements OnInit {
 
     ngOnInit(): void {
         this.token = jwt_decode(localStorage.getItem('token'));
-        this.isClientSubscription = this.dataService.currentData.subscribe(isClient => this.client = isClient)
+        this.ClientSubscription = this.dataService.currentData.subscribe(isClient => this.client = isClient)
         this.clientsSubscription = this.clientService.getClientsByManagerEmail(this.token.email).subscribe(
             clients => {
                 this.clients = clients;
@@ -71,8 +71,11 @@ export class ClientListComponent implements OnInit {
     }
 
     ngOnDestroy(): void {
-        this.isClientSubscription.unsubscribe(); // unsubscribe of undefined when (click)="backToManager"
-        this.clientsSubscription.unsubscribe();
+        if(this.clientsSubscription){
+            this.clientsSubscription.unsubscribe();
+        }
+        if(this.ClientSubscription){
+            this.ClientSubscription.unsubscribe();        }
     }
     
     manage(id): void {

@@ -41,7 +41,7 @@ export class Company {
   industry: Industry;
 
   @OneToMany(type => Price, price => price.company)
-  prices: Promise<Price[]>;
+  prices: Price[];
 
   @OneToMany(type => Order, order => order.company)
   orders: Promise<Order[]>;

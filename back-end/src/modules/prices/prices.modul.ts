@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CoreModule } from 'src/common/core/core.module';
 import { AuthModule } from 'src/auth/auth.module';
-import { PricesController } from './prices.controler';
+import { PricesController } from './prices.controller';
 
 @Module({
   imports: [CoreModule, AuthModule],

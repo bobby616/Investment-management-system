@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { ClientModel } from 'src/app/adminOverview/models/client-model';
 import { Client } from './models/client.model';
 
 @Injectable()
