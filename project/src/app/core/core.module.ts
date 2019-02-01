@@ -8,6 +8,7 @@ import { AuthService } from '../auth/auth.service';
 import { SearchService } from './search.service';
 import { AppConfig } from '../common/app.config';
 import { DataService } from '../managerOverview/client/data.service';
+import { PriceService } from '../user/services/prices.service';
 
 @NgModule({
   providers: [
@@ -19,7 +20,8 @@ import { DataService } from '../managerOverview/client/data.service';
     SearchService,
     AuthRouteActivatorService,
     AnonymousRouteActivatorService,
-    DataService
+    DataService,
+    PriceService
   ]
 })
 export class CoreModule {

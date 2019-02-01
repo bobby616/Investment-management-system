@@ -5,9 +5,10 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StockComponent } from './component/stock.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { ChartComponent } from '../managerOverview/chart-component/chart.component';
 
 @NgModule({
-  declarations: [StockComponent],
+  declarations: [StockComponent, ChartComponent],
   imports: [
     CommonModule,
     SharedModule, StockRoutingModule, FormsModule, ReactiveFormsModule,

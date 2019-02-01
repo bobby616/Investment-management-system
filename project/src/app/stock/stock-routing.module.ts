@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AuthRouteActivatorService } from '../core/route-guards/auth-route-activator.service';
 import { AnonymousRouteActivatorService } from '../core/route-guards/anonymous-route-activator.service';
 import { StockComponent } from './component/stock.component';
+import { ChartComponent } from '../managerOverview/chart-component/chart.component';
 
 const routes: Routes = [
     {
@@ -14,6 +15,11 @@ const routes: Routes = [
         path: 'all',
         component: StockComponent
     },
+    {
+        path: 'chart',
+        component: ChartComponent
+    },
+
     {
         path: '**',
         redirectTo: '/not-found'

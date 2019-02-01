@@ -1,14 +1,10 @@
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { HomeComponent } from './components/home/home.component';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ServerErrorComponent } from './components/server-error/server-errror.component';
-import { RoleGuard } from './core/route-guards/route-guard.service';
 import { AdminGuard } from './core/admin-guard';
 import { ManagerGuard } from './core/manager-guard';
 import { LoginComponent } from './auth/login/login.component';
-import { StockComponent } from './stock/component/stock.component';
-
 const routes: Routes = [
 
   {
