@@ -7,9 +7,11 @@ import { ModalDTO } from '../models/modal.model';
 import { UserInfoDTO } from '../models/user-info.model';
 import { Client } from '../managerOverview/client/models/client.model';
 import { DataService } from '../managerOverview/client/data.service';
+import { AddSubstractDTO } from '../models/add-substract.motel';
 
 @Injectable()
 export class FundsService {
+    
     public user = new BehaviorSubject<object>({});
     clientId: string;
     
@@ -24,7 +26,7 @@ export class FundsService {
         this.clientId = client.id;
     });
 
-    substractFund(modal: ModalDTO) {
+    public substractFund(modal: ModalDTO) {
         const clientCred = {
             id: this.clientId,
             amount: modal.total
@@ -35,9 +37,12 @@ export class FundsService {
                     return this.notificationService.error('Transaction failed due to not sufficient funds',);
                 }
                 this.fundsHttpService.substractFund(clientCred).subscribe();
-                console.log('wewewe'+ currentClient);
                 this.user.next(currentClient);
             }
         );
+    }
+
+    public updateFunds(clientCred: AddSubstractDTO): any {
+        this.fundsHttpService.addFund(clientCred);
     }
 }

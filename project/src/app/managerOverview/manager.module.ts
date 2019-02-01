@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ClientModule } from './client/client.module';
 import { ManagerRoutingModule } from './manager.routing.module';
-import { ClientManageModule } from './client/clientManageOverview/clientManage.module';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { ClientComponent } from './client/components/client-component/client.component';

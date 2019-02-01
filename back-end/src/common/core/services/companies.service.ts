@@ -101,7 +101,7 @@ export class CompaniesService {
             const company = await this.companyRepository.findOne({ where: { abbr: companySymbol.abbr } });
             return company;
         } catch (error) {
-            throw new HttpException('Company not found!', HttpStatus.NOT_FOUND);
+            throw new BadRequestException('No company to show');
         }
     }
 }

@@ -24,6 +24,5 @@ import { ModalComponent } from '../shared/modal/modal.component';
   entryComponents: [
     ModalComponent
   ],
-  bootstrap: [ModalComponent]
 })
 export class StockModule { }

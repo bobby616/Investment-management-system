@@ -17,9 +17,12 @@ export class StocksService {
         return this.http.get(`${this.appConfig.apiUrl}/stocks/all`);
     }
     public getCompanyLastPrices(): Observable<object> {
-        return this.http.get(`${this.appConfig.apiUrl}/prices/lastPrice`);
+        return this.http.get(`${this.appConfig.apiUrl}/prices/lastPrices`);
     }
-    public retrieveCompanyInfo(companyAbbr): Observable<object> {
+    public getLastPricesForOneCompany(id: string): Observable<object> {
+        return this.http.get(`${this.appConfig.apiUrl}/prices/lastPrice/${id}`);
+    }
+    public getCompanyByAbbr(companyAbbr): Observable<object> {
         return this.http.post(`${this.appConfig.apiUrl}/stocks/abbreviature`, companyAbbr);
     }
     getStockData(): any[] {

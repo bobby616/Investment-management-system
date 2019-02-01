@@ -1,3 +1,9 @@
-<p>
-  client-positions works!
-</p>
+<ag-grid-angular 
+style="height:600px; font-size: 22px" class="ag-theme-blue"
+[gridOptions]="gridOptions"
+[rowSelection]="rowSelection"
+[floatingFilter]="true"
+[defaultColDef]="defaultColDef"
+(rowClicked)="onRowSelected($event)"
+>
+</ag-grid-angular>

@@ -77,7 +77,7 @@ export class ClientListComponent implements OnInit {
             setTimeout(() => {
                 this.dataService.changeIsClient(this.client);
                 this.router.navigateByUrl(`/manager/clients/${id}`);
-               }, 10)
+            }, 10)
         })
     }
 }

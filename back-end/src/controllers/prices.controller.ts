@@ -21,9 +21,14 @@ export class PricesController {
         private priceService: PricesService,
     ) { }
 
-    @Get('lastPrice')
+    @Get('lastPrices')
     async getLatestForAllCompanies(): Promise<Price[]> {
         return await this.priceService.getLastPricePerCompany();
+    }
+
+    @Get('lastPrice/:id')
+    async getLastPriceForOneCompany(@Param('id') id: string): Promise<Price>{
+        return await this.priceService.getLastPrice(id);
     }
 
     @Get('prices/company')

@@ -11,6 +11,8 @@ import { DataService } from '../managerOverview/client/data.service';
 import { Client } from '../managerOverview/client/models/client.model';
 import { take } from 'rxjs/operators';
 import { ClientService } from '../managerOverview/client/client.service';
+import { CloseOrderDTO } from '../models/close-order.model';
+import { StockDTO } from '../models/stock.dto';
 
 @Injectable()
 export class OrdersService {
@@ -30,7 +32,8 @@ export class OrdersService {
     });
 
     saveOrder(result: ModalDTO, companyAbbr) {
-        this.stockService.retrieveCompanyInfo({ abbr: companyAbbr }).subscribe((companyInfo: CompanyDTO) => {
+        this.stockService.getCompanyByAbbr({ abbr: companyAbbr }).subscribe((companyInfo: CompanyDTO) => {
+            console.log(companyInfo)
             const order: CreateOrderDTO = {
                 openDate: result.openDate,
                 openPrice: result.price,
@@ -47,6 +50,21 @@ export class OrdersService {
                         this.notificationService.success('Order is successful');
                     }, 1000);
                 }
+            });
+        });
+    }
+
+    closeOrder(orderBody: CloseOrderDTO, CompanyAbbr) {
+        this.stockService.getCompanyByAbbr({ abbr: CompanyAbbr }).subscribe((company: CompanyDTO) => {
+            orderBody.companyId = company.id;
+            this.stockService.getLastPricesForOneCompany(company.id).subscribe((prices: StockDTO) => {
+                orderBody.closePrice = prices.startprice;
+                this.orderHttpService.closeOrder(orderBody).subscribe((updatedOrder: any) => {
+                    console.log(updatedOrder);
+                    this.fundsService
+                        .updateFunds({ id: this.client, amount: updatedOrder.result});
+                        this.notificationService.success('Position closed');
+                });
             });
         });
     }

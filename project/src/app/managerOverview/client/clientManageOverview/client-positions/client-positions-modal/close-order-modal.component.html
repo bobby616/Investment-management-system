@@ -1,0 +1,12 @@
+<div class="header" mat-dialog-title>
+    <div>
+            <span>Would you like to close order for {{this.data.name}}</span>
+            <span>Open price at {{openPrice}}</span>
+    </div>
+</div>
+<br>
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button [mat-dialog-close]="getDialogInfo(false)">Cancel</button>
+  <button mat-raised-button color="success" [mat-dialog-close]="getDialogInfo(true)">Confirm</button>
+</mat-dialog-actions>

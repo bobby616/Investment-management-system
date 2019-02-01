@@ -51,6 +51,6 @@ export class StocksController {
   // shitty, I know but I didn't have time
   @Post('/abbreviature')
     getCompany(@Body() abbr: string) {
-            return this.companiesService.getCompany(abbr);
+        return this.companiesService.getCompany(abbr);
     }
 }
