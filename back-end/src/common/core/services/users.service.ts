@@ -161,4 +161,14 @@ export class UsersService {
       throw new BadRequestException('No such manager');
     }
   }
+
+  async getClientsByManagerEmail(managerEmail: string): Promise<Client[]> {
+    try {
+      const manager = await this.usersRepository.findOne({email: managerEmail});
+      const clients = await this.clientRepository.find({manager});
+      return clients;
+    } catch (error) {
+      throw new BadRequestException('No such manager');
+    }
+  }
 }

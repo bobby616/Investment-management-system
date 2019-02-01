@@ -18,7 +18,7 @@ export class SidebarComponent {
   client: Client;
   ClientSubscription: Subscription;
   constructor(private readonly authService: AuthenticationService,
-     private readonly route: ActivatedRoute,
+    private readonly route: ActivatedRoute,
     private readonly clientService: ClientService,
     private readonly router: Router,
     private readonly dataService: DataService) { }

@@ -4,6 +4,7 @@ import { ClientService } from '../../client.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../data.service';
 import { Subscription } from 'rxjs';
+import * as jwt_decode from 'jwt-decode';
 
 @Component(
     {
@@ -15,6 +16,7 @@ import { Subscription } from 'rxjs';
 
 export class ClientListComponent implements OnInit {
     pageTitle = 'Clients list';
+    token: any;
     imageWidth = 50;
     imageMargin = 2;
     showImage = false;
@@ -57,8 +59,9 @@ export class ClientListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.token = jwt_decode(localStorage.getItem('token'));
         this.isClientSubscription = this.dataService.currentData.subscribe(isClient => this.client = isClient)
-        this.clientsSubscription = this.clientService.getClients().subscribe(
+        this.clientsSubscription = this.clientService.getClientsByManagerEmail(this.token.email).subscribe(
             clients => {
                 this.clients = clients;
                 this.filteredClients = this.clients;
@@ -71,6 +74,7 @@ export class ClientListComponent implements OnInit {
         this.isClientSubscription.unsubscribe(); // unsubscribe of undefined when (click)="backToManager"
         this.clientsSubscription.unsubscribe();
     }
+    
     manage(id): void {
         this.clientService.getClient(id).subscribe(client => {
             this.client = client;
