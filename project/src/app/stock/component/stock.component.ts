@@ -3,38 +3,99 @@ import { RequesterService } from 'src/app/core/requester.service';
 import { AppConfig } from 'src/app/common/app.config';
 import { CompanyService } from 'src/app/user/services/company.service';
 import { Router } from '@angular/router';
+import { NotificatorService } from 'src/app/core/notificator.service';
+import { StockDTO } from 'src/app/models/stock.dto';
+import { GridOptions } from 'ag-grid-community';
+import { MatDialog } from '@angular/material';
+import { StocksService } from '../stock.service';
+import { FundsService } from '../funds.service';
+import { OrdersService } from '../orders.service';
+import { ModalDTO } from 'src/app/models/modal.model';
+import { ModalComponent } from 'src/app/shared/modal/modal.component';
+import { Client } from 'src/app/managerOverview/client/models/client.model';
+import { Subscription } from 'rxjs';
+import { DataService } from 'src/app/managerOverview/client/data.service';
+import { StorageService } from 'src/app/core/storage.service';
+import { ClientService } from 'src/app/managerOverview/client/client.service';
 
 @Component({
-  selector: 'app-stock',
-  templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.css']
+    selector: 'app-stock',
+    templateUrl: './stock.component.html',
+    styleUrls: ['./stock.component.css']
 })
 export class StockComponent implements OnInit {
+    public gridOptions: GridOptions;
+    client: Client | undefined;
+    clientSubscription: Subscription;
 
-  title = 'app';
+    private columnDefs = [
+        { headerName: 'Symbol', field: 'symbol', sortable: true, },
+        { headerName: 'Market', field: 'market', sortable: true, },
+        { headerName: 'Sell Price ($)', field: 'sellprice', sortable: true, filter: "agNumberColumnFilter" },
+        { headerName: 'Buy Price ($)', field: 'buyprice', sortable: true, filter: "agNumberColumnFilter" }
+    ];
+    private defaultColDef = { width: 300, filter: true };
+    private rowData = [];
+    private rowSelection = 'single';
 
-  public columnDefs = [
-      {headerName: 'id', field: 'id', sortable: true, filter: true, onCellClicked: (event) => {
-        this.companyService.changeId(event.value);
-        this.router.navigate(['/manager/stock/chart'])
-      }},
-      {headerName: 'Name', field: 'name', sortable: true, filter: true},
-      {headerName: 'Abbriviature', field: 'abbr', sortable: true, filter: true },
-      {headerName: 'Icon', field: 'icon', sortable: true, filter: true },
-      {headerName: 'CEO', field: 'ceo', sortable: true, filter: true },
-      {headerName: 'аddress', field: 'address', sortable: true, filter: true }
-  ];
+    constructor(
+        private stockService: StocksService,
+        public dialog: MatDialog,
+        private notification: NotificatorService,
+        private fundsService: FundsService,
+        private orderService: OrdersService,
+        private readonly dataService: DataService,
+        private storageService: StorageService,
+        private clientService: ClientService,
+    ) { }
+    ngOnInit() {
+        this.clientSubscription = this.dataService.currentData.subscribe(client => {
+            this.client = client;
+        });
+        this.storageService.setItem('clientId', this.client.id);
 
-  rowData: any;
 
-  constructor(private request: RequesterService,
-    private readonly app: AppConfig,
-    private readonly companyService: CompanyService,
-    private readonly router: Router) {
+        this.gridOptions = <GridOptions>{
+            enableRangeSelection: true,
+            columnDefs: this.columnDefs,
+            onGridReady: () => {
+                this.stockService.getCompanyLastPrices().subscribe((response: []) => {
+                    response.forEach((stock: StockDTO) => {
+                        const marketData: any = {};
+                        marketData.symbol = stock.company.abbr;
+                        marketData.market = stock.company.name;
+                        marketData.sellprice = +stock.lowprice;
+                        marketData.buyprice = +stock.highprice;
+                        this.rowData.push(marketData);
+                    });
+                    if (this.gridOptions.api) {
+                        this.gridOptions.api.setRowData(this.rowData);
+                    }
+                });
+                this.gridOptions.rowHeight = 45;
+            }
+        };
+    }
+    onRowSelected(event) {
+        const instrument = `${event.data.symbol} (${event.data.market})`;
+        const dialogRef = this.dialog.open(ModalComponent,
+            {
+                data: {
+                    name: instrument,
+                    buyprice: +event.data.buyprice,
+                    sellprice: +event.data.sellprice
+                }
+            });
 
-  }
-  ngOnInit() {
-      this.rowData = this.request.get(`${this.app.apiUrl}/stocks/all`);
-      console.log(this.rowData);
-  }
+        dialogRef.afterClosed().subscribe((result: ModalDTO) => {
+            if (result) {
+                if (isNaN(result.total)) {
+                    return this.notification.error('Invalid unit or price');
+                }
+                
+                this.fundsService.substractFund(result);
+                this.orderService.saveOrder(result, event.data.symbol);
+            }
+        });
+    }
 }

@@ -14,6 +14,7 @@ import { StocksController } from './controllers/stocks.controller';
 import { FundsController } from './controllers/funds.controller';
 import { OrdersController } from './controllers/orders.controller';
 import { IndustryController } from './controllers/industry.controller';
+import { PricesController } from './controllers/prices.controller';
 @Module({
   imports: [
     ConfigModule,
@@ -27,7 +28,7 @@ import { IndustryController } from './controllers/industry.controller';
     PricesModule,
     UsersModule,
   ],
-  controllers: [StocksController, FundsController, OrdersController, IndustryController],
+  controllers: [PricesController, StocksController, FundsController, OrdersController, IndustryController],
   providers: [UsersService],
 })
 export class AppModule { }

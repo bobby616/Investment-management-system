@@ -7,6 +7,7 @@ import { IndustriesService } from "src/common/core/services/industry.service";
 import { IndustryDTO } from "src/models/industry/industry.dto";
 import { IndustryUpdateDTO } from "src/models/industry/industryUpdate.dto";
 import { OrderDTO } from "src/models/order/order.dto";
+import { CloseOrderDTO } from "src/models/order/closeOrder.dto";
 
 @Controller('orders')
 export class OrdersController {
@@ -17,12 +18,9 @@ export class OrdersController {
         private readonly industryService: IndustriesService,
     ) { }
 
-    @Post('/create/:id')
-    async createOrder(@Body(new ValidationPipe({
-        transform: true,
-        whitelist: true,
-    })) order: OrderDTO, clientId: string) {
-        return this.ordersService.createOrder(clientId, order);
+    @Post('/create')
+    async createOrder(@Body() order: OrderDTO) {
+        return this.ordersService.createOrder(order);
     }
 
     @Get('/all')
@@ -36,8 +34,8 @@ export class OrdersController {
     }
 
     @Post('/close')
-    async closeOrderByOrderID(@Body() orderId: string, clientId: string) {
-        return this.ordersService.closeOrder(orderId);
+    async closeOrderByOrderID(@Body() order: CloseOrderDTO) {
+        return this.ordersService.closeOrder(order);
     }
 
     @Get('/getClosed')
@@ -45,8 +43,8 @@ export class OrdersController {
         return this.ordersService.getClosedOrders(id);
     }
 
-    @Get('/getOpen')
-    async getOpenOrders(@Body() id: string){
+    @Get('/getOpen/:id')
+    async getOpenOrders(@Param('id') id: string){
         return this.ordersService.getOpenOrders(id);
     }
 

@@ -25,9 +25,9 @@ export class PricesController {
     async getPrices(@Body(new ValidationPipe({
         transform: true,
         whitelist: true,
-      })) priceRequest: PriceRequestDTO): Promise<object> {
+    })) priceRequest: PriceRequestDTO): Promise<object> {
 
-      return await this.pricesService.getCompanyPrices(priceRequest.id, priceRequest.lastN, priceRequest.startdate, priceRequest.enddate);
+    return await this.pricesService.getCompanyPrices(priceRequest.id, priceRequest.lastN, priceRequest.startdate, priceRequest.enddate);
     }
 
     @Get('chart/:id')

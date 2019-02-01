@@ -12,7 +12,7 @@ export class DataService {
 
   changeIsClient(client: Client) {
     console.log(client)
-    this.dataSource.next(client)
+    this.dataSource.next(client);
   }
 
 }

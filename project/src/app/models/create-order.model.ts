@@ -1,5 +1,4 @@
-
-export class OrderDTO {
+export class CreateOrderDTO {
     openDate: Date;
     openPrice: number;
     units: number;
@@ -7,3 +6,4 @@ export class OrderDTO {
     clientId: string;
     direction: string;
 }
+

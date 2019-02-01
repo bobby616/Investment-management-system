@@ -24,13 +24,13 @@ export class OrderService {
         private readonly clientRepository: Repository<Client>
     ) { }
 
-    async createOrder(clientId: string, order: OrderDTO) {
-        const foundUser: Client = await this.clientRepository.findOne({ where: { id: clientId } });
+    async createOrder(order: OrderDTO) {
+        const foundUser: Client = await this.clientRepository.findOne({ where: { id: order.clientId } });
         if (!foundUser) {
             throw new HttpException('Client not found!', HttpStatus.NOT_FOUND);
         }
 
-        const foundCompany: Company = await this.companyRepository.findOne({ where: { id: order.companyId } });
+        const foundCompany: Company = await this.companyRepository.findOneOrFail({ where: { id: order.companyId } });
         if (!foundCompany) {
             throw new HttpException('Company not found!', HttpStatus.NOT_FOUND);
         }
@@ -39,20 +39,17 @@ export class OrderService {
         if (!foundStatus) {
             throw new HttpException('Status not found!', HttpStatus.NOT_FOUND);
         }
-
-        const amountNeeded = order.buyPrice * order.units;
+        const amountNeeded = order.openPrice * order.units;
         if (amountNeeded <= foundUser.funds.currentamount) {
             try {
                 const createOrder: Order = await this.orderRepository.create();
-                createOrder.opendate = order.openDate;
-                createOrder.closedate = order.closeDate;
-                createOrder.buyprice = order.buyPrice;
-                createOrder.sellprice = order.sellPrice;
+                createOrder.opendate = new Date();
+                createOrder.openPrice = order.openPrice;
                 createOrder.units = order.units;
                 createOrder.client = Promise.resolve(foundUser);
                 createOrder.status = foundStatus;
-                createOrder.company = Promise.resolve(foundCompany);
-
+                createOrder.direction = order.direction;
+                createOrder.company = foundCompany;
                 await this.orderRepository.save(createOrder);
             } catch (error) {
                 throw new HttpException('Cannot create order', HttpStatus.BAD_REQUEST);
@@ -60,7 +57,6 @@ export class OrderService {
         } else {
             throw new HttpException('You are out of money', HttpStatus.BAD_REQUEST);
         }
-
     }
 
     async getOrdersAll() {
@@ -82,12 +78,27 @@ export class OrderService {
         return foundOrder;
     }
 
-    async closeOrder(id: string, orderClose?: CloseOrderDTO): Promise<Order> {
+    async closeOrder(closeOrder: CloseOrderDTO): Promise<Order> {
         try {
-            const order: Order = await this.orderRepository.findOne({ id })
-            order.status = await this.statusRepository.findOne({ where: { statusname: 'closed' } })
-            /* order.closedate = new Date();
-            order.sellprice = orderClose.sellPrice; */
+            const order: Order = await this.orderRepository.findOne({
+                where: { company: closeOrder.companyId, units: closeOrder.units, openPrice: closeOrder.price, direction: closeOrder.direction },
+            });
+
+            order.closedate = new Date();
+            order.closePrice = +closeOrder.closePrice;
+            order.status = await this.statusRepository.findOne({ where: { statusname: 'closed' } });
+
+            let result = +order.closePrice - (+order.openPrice);
+            if (order.direction === 'Sell') {
+                if (order.closePrice > order.openPrice) {
+                    result = -(result);
+                } else {
+                    result = +result;
+                }
+            }
+
+            order.result = result * order.units;
+
             return await this.orderRepository.save(order);
         } catch (error) {
             throw new HttpException('Orders not found!', HttpStatus.NOT_FOUND);
@@ -115,12 +126,11 @@ export class OrderService {
     }
 
     async getOpenOrders(id: string) {
-
         const foundStatus = await this.statusRepository.findOne({ where: { statusname: 'opened' } });
-        const foundOpenOrders = await this.orderRepository.find({
-            where: {
-                clientId: id,
-                status: foundStatus.id,
+        const foundOpenOrders = await this.orderRepository.find({where: 
+            { 
+            clientId: id,
+            status: foundStatus.id
             },
         });
 

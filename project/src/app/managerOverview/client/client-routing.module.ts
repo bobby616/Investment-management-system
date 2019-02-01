@@ -9,18 +9,6 @@ const routes: Routes = [
     },
     {
       path: ':id', loadChildren: './clientManageOverview/clientManage.module#ClientManageModule'
-      /* children: [
-        {
-          path: '', component: ClientSidebarComponent,
-        },
-        {
-          path: 'portfolio', component: ClientManageComponent,
-        },
-        {
-          path: '**',
-          redirectTo: '/not-found'
-        },
-      ] */
     },
     {
       path: '**',
