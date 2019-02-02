@@ -137,9 +137,6 @@ export class OrderService {
         if (!foundOpenOrders) {
             throw new HttpException('Open orders not found!', HttpStatus.NOT_FOUND);
         }
-        if (foundOpenOrders.length === 0) {
-            throw new BadRequestException('Client has no opened orders');
-        }
 
         return foundOpenOrders;
     }

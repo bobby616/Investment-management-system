@@ -37,6 +37,12 @@ export class UsersController {
     return this.usersService.getManager(id);
   }
 
+  @Get('/getClientsByManagerEmail/:email')
+  getClientsByManagerId(@Param('email') email: string) {
+    return this.usersService.getClientsByManagerEmail(email);
+  }
+
+
   @Post('/createManager')
   async createManager(@Body(new ValidationPipe({
     transform: true,

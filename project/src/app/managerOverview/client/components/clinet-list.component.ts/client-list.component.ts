@@ -4,6 +4,7 @@ import { ClientService } from '../../client.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../data.service';
 import { Subscription } from 'rxjs';
+import * as jwt_decode from 'jwt-decode';
 
 @Component(
     {
@@ -15,6 +16,7 @@ import { Subscription } from 'rxjs';
 
 export class ClientListComponent implements OnInit {
     pageTitle = 'Clients list';
+    token: any;
     imageWidth = 50;
     imageMargin = 2;
     showImage = false;
@@ -40,25 +42,16 @@ export class ClientListComponent implements OnInit {
         this.filteredClients = this.listFilter ? this.performFilter(this.listFilter) : this.clients;
     }
 
-    
-
-    onRatingClicked(message: string): void {
-        this.pageTitle = 'Product List: ' + message;
-    }
-
     performFilter(filterBy: string): Client[] {
         filterBy = filterBy.toLocaleLowerCase();
         return this.clients.filter((client: Client) =>
             client.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1);
     }
 
-    toggleImage(): void {
-        this.showImage = !this.showImage;
-    }
-
     ngOnInit(): void {
-        this.ClientSubscription = this.dataService.currentData.subscribe(Client => this.client = Client)
-        this.clientsSubscription = this.clientService.getClients().subscribe(
+        this.token = jwt_decode(localStorage.getItem('token'));
+        this.ClientSubscription = this.dataService.currentData.subscribe(isClient => this.client = isClient)
+        this.clientsSubscription = this.clientService.getClientsByManagerEmail(this.token.email).subscribe(
             clients => {
                 this.clients = clients;
                 this.filteredClients = this.clients;
@@ -74,6 +67,7 @@ export class ClientListComponent implements OnInit {
         if(this.ClientSubscription){
             this.ClientSubscription.unsubscribe();        }
     }
+    
     manage(id): void {
         this.clientService.getClient(id).subscribe(client => {
             this.client = client;

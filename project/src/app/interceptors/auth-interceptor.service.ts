@@ -18,20 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     let modifiedReq: HttpRequest<any> = req;
 
-    if (!req.url.includes('wikipedia')) {
-      const token = this.storageService.getItem('token');
-
-      modifiedReq = token
-        ? req.clone({
-            headers: req.headers
-              .set('Authorization', 'Bearer ' + token)
-              .set('Content-Type', 'application/json')
-          })
-        : req.clone({
-            headers: req.headers.set('Content-Type', 'application/json')
-          });
-    }
-
     return next.handle(modifiedReq);
   }
 }

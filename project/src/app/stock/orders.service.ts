@@ -60,7 +60,6 @@ export class OrdersService {
             this.stockService.getLastPricesForOneCompany(company.id).subscribe((prices: StockDTO) => {
                 orderBody.closePrice = prices.startprice;
                 this.orderHttpService.closeOrder(orderBody).subscribe((updatedOrder: any) => {
-                    console.log(updatedOrder);
                     this.fundsService
                         .updateFunds({ id: this.client, amount: updatedOrder.result});
                         this.notificationService.success('Position closed');

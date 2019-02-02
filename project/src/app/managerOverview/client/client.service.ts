@@ -21,6 +21,10 @@ export class ClientService {
         return this.http.get<Client>(`${this.app.apiUrl}/users/getClient/${id}`);
     }
 
+    getClientsByManagerEmail(managerEmail: string): Observable<Client[]> {
+        return this.http.get<Client[]>(`${this.app.apiUrl}/users/getClientsByManagerEmail/${managerEmail}`);
+    }
+
     private handleError(err: HttpErrorResponse) {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console
