@@ -23,6 +23,7 @@ export class ClientPositionsComponent implements OnInit {
   private overlayNoRowsTemplate;
 
   private columnDefs = [
+    { headerName: 'Name', field: 'name', sortable: true, },
     { headerName: 'Symbol', field: 'symbol', sortable: true, },
     { headerName: 'Units', field: 'units', sortable: true, },
     { headerName: 'Direction', field: 'direction', sortable: true, },
@@ -56,6 +57,7 @@ export class ClientPositionsComponent implements OnInit {
         this.orderHTTPService.getOrdersByClientId(this.client.id).subscribe((response: []) => {
           response.forEach((order: OpenOrderDTO) => {
             const data: any = {};
+            data.name = order.company.name;
             data.symbol = order.company.abbr;
             data.units = order.units;
             data.direction = order.direction;
@@ -72,7 +74,7 @@ export class ClientPositionsComponent implements OnInit {
     };
   }
   onRowSelected(event) {
-    const instrument = `${event.data.symbol}`;
+    const instrument = `${event.data.name}`;
     const dialogRef = this.dialog.open(CloseOrderModalComponent,
       {
         data: {

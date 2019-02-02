@@ -88,16 +88,16 @@ export class OrderService {
             order.closePrice = +closeOrder.closePrice;
             order.status = await this.statusRepository.findOne({ where: { statusname: 'closed' } });
 
-            let result = +order.closePrice - (+order.openPrice);
+            let resultAfterClose = +order.closePrice - (+order.openPrice);
             if (order.direction === 'Sell') {
                 if (order.closePrice > order.openPrice) {
-                    result = -(result);
+                    resultAfterClose = -(resultAfterClose);
                 } else {
-                    result = +result;
+                    resultAfterClose = +resultAfterClose;
                 }
             }
 
-            order.result = result * order.units;
+            order.result = resultAfterClose * order.units;
 
             return await this.orderRepository.save(order);
         } catch (error) {
