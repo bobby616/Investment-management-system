@@ -49,7 +49,7 @@ export class AllPositionsComponent implements OnInit {
     private storageService: StorageService,
     private clientService: ClientService,
   ) {
-    this.overlayNoRowsTemplate = "<span>There are no active positions for this client</span>";
+    this.overlayNoRowsTemplate = "<span>There are no active positions</span>";
   }
 
 
