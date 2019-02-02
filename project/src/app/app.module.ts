@@ -23,6 +23,7 @@ import { ManagerGuard } from './core/manager-guard';
 import { RoleGuard } from './core/route-guards/route-guard.service';
 import { MatIconModule } from '@angular/material';
 import { ClientPositionsComponent } from './managerOverview/client/clientManageOverview/client-positions/client-positions.component';
+import { AllPositionsComponent } from './managerOverview/client/components/all-positions/all-positions.component';
 
 @NgModule({
   declarations: [

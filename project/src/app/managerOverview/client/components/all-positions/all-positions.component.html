@@ -1,0 +1,10 @@
+<ag-grid-angular 
+style="height:600px; font-size: 22px" class="ag-theme-blue"
+[gridOptions]="gridOptions"
+[rowSelection]="rowSelection"
+[floatingFilter]="true"
+[defaultColDef]="defaultColDef"
+[overlayNoRowsTemplate]="overlayNoRowsTemplate"
+(rowClicked)="onRowSelected($event)"
+>
+</ag-grid-angular>

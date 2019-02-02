@@ -5,6 +5,7 @@ import { ClientListComponent } from './components/clinet-list.component.ts/clien
 import { ClientComponent } from './components/client-component/client.component';
 import { ClientService } from './client.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AllPositionsComponent } from './components/all-positions/all-positions.component';
 
 @NgModule({
     imports: [SharedModule, ClientRoutingModule, FormsModule, ReactiveFormsModule],
