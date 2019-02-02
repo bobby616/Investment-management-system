@@ -8,18 +8,17 @@ import { ChartComponent } from '../managerOverview/chart-component/chart.compone
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/manager/stock/all',
+        redirectTo: '/manager/stock/all', 
         pathMatch: 'full'
     },
     {
         path: 'all',
         component: StockComponent
-    },
+    }, 
     {
         path: 'chart',
         component: ChartComponent
     },
-
     {
         path: '**',
         redirectTo: '/not-found'

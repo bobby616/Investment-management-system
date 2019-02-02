@@ -25,8 +25,9 @@ import { ClientService } from 'src/app/managerOverview/client/client.service';
 })
 export class StockComponent implements OnInit {
     public gridOptions: GridOptions;
-    client: Client | undefined;
+    client: Client | null;
     clientSubscription: Subscription;
+    companySubcription: Subscription;
 
     private columnDefs = [
         { headerName: 'Symbol', field: 'symbol', sortable: true, },
@@ -45,14 +46,14 @@ export class StockComponent implements OnInit {
         private fundsService: FundsService,
         private orderService: OrdersService,
         private readonly dataService: DataService,
-        private storageService: StorageService,
-        private clientService: ClientService,
+        private companyService: CompanyService,
+        private router: Router
     ) { }
     ngOnInit() {
         this.clientSubscription = this.dataService.currentData.subscribe(client => {
             this.client = client;
         });
-        this.storageService.setItem('clientId', this.client.id);
+        // this.storageService.setItem('clientId', this.client.id);
 
 
         this.gridOptions = <GridOptions>{
@@ -77,6 +78,8 @@ export class StockComponent implements OnInit {
         };
     }
     onRowSelected(event) {
+      console.log(event)
+      if(this.client) {
         const instrument = `${event.data.symbol} (${event.data.market})`;
         const dialogRef = this.dialog.open(ModalComponent,
             {
@@ -97,5 +100,18 @@ export class StockComponent implements OnInit {
                 this.orderService.saveOrder(result, event.data.symbol);
             }
         });
+      } 
+      else {
+          this.companySubcription = this.companyService.getCompanyByAbb(event.data.symbol).subscribe((data) => {
+              console.log(event.data.symbol)
+          this.companyService.changeId(data.id);
+          this.router.navigate(['/manager/stock/chart'])
+        })
+      }
+    }
+    ngOnDestroy() {
+        if(this.companySubcription) {
+            this.companySubcription.unsubscribe()
+        }
     }
 }
