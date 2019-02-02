@@ -9,7 +9,7 @@
       <div class='col-md-8'>
         <div class='row'>
           <div class='col-md-4'>Name:</div>
-          <div class='col-md-8'>{{client.firstName}}</div>
+          <div class='col-md-8'>{{client.firstName}} {{client.lastName}}</div>
         </div>
         <div class='row'>
           <div class='col-md-4'>email:</div>
@@ -22,6 +22,14 @@
         <div class='row'>
           <div class='col-md-4'>Address:</div>
           <div class='col-md-8'>{{client.address}}</div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>Date of creation:</div>
+            <div class='col-md-8'>{{client.dateregistered | date}}</div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>Balance:</div>
+            <div class='col-md-8'>{{client.funds.currentamount | currency:'USD':'symbol':'1.2-2'}}</div>
         </div>
       </div>
     </div>

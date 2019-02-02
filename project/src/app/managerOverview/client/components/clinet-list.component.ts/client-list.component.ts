@@ -42,20 +42,10 @@ export class ClientListComponent implements OnInit {
         this.filteredClients = this.listFilter ? this.performFilter(this.listFilter) : this.clients;
     }
 
-    
-
-    onRatingClicked(message: string): void {
-        this.pageTitle = 'Product List: ' + message;
-    }
-
     performFilter(filterBy: string): Client[] {
         filterBy = filterBy.toLocaleLowerCase();
         return this.clients.filter((client: Client) =>
             client.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1);
-    }
-
-    toggleImage(): void {
-        this.showImage = !this.showImage;
     }
 
     ngOnInit(): void {
