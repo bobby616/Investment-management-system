@@ -73,11 +73,10 @@ export class ClientListComponent implements OnInit {
     manage(id): void {
         this.clientService.getClient(id).subscribe(client => {
             this.client = client;
-            setTimeout(() => {
                 this.localStorage.setItem('id', client.id)
                 this.dataService.changeIsClient(this.client);
                 this.router.navigateByUrl(`/manager/clients/${id}`);
-            }, 10)
+            
         })
     }
 }

@@ -24,7 +24,7 @@ export class ClientManageComponent implements OnInit {
   
 
   ngOnInit() {
-   this.clientSubscription= this.clientService.getClient(this.localStorage.getItem('id')).subscribe((client) => {
+   this.clientSubscription= this.dataService.currentData.subscribe((client) => {
       this.client = client
     })
   }
