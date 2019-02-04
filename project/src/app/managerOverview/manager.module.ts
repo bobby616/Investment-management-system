@@ -1,3 +1,4 @@
+import { NewsComponent } from './news/news.component';
 import { NgModule } from '@angular/core';
 import { ManagerRoutingModule } from './manager.routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -7,6 +8,7 @@ import { ClientService } from './client/client.service';
 
 @NgModule({
     declarations: [
+        NewsComponent
     ],
     imports: [
         ManagerRoutingModule,

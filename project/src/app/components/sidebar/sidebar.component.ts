@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
 import { AuthenticationService } from 'src/app/core/auth.service';
@@ -6,6 +7,7 @@ import { ClientService } from 'src/app/managerOverview/client/client.service';
 import { Client } from 'src/app/managerOverview/client/models/client.model';
 import { DataService } from 'src/app/managerOverview/client/data.service';
 import { Subscription } from 'rxjs';
+import { StorageService } from 'src/app/core/storage.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,15 +18,18 @@ export class SidebarComponent {
   token: string;
   id: string;
   client: Client;
-  ClientSubscription: Subscription;
+  clientSubscription: Subscription;
   constructor(private readonly authService: AuthenticationService,
     private readonly route: ActivatedRoute,
     private readonly clientService: ClientService,
     private readonly router: Router,
-    private readonly dataService: DataService) { }
+    private readonly dataService: DataService,
+    private readonly localStorage: StorageService) { }
 
   ngOnInit() {
-    this.ClientSubscription = this.dataService.currentData.subscribe(client => {this.client = client})
+    this.clientSubscription= this.clientService.getClient(this.localStorage.getItem('id')).subscribe((client) => {
+      this.client = client
+    })
     this.token = jwt_decode(localStorage.getItem('token'));
   }
 
@@ -34,10 +39,16 @@ export class SidebarComponent {
   }
 
   onBack(){
+    this.dataService.changeIsClient(null)
+    this.localStorage.removeItem('id')
     this.client = null;
-    this.router.navigate(['manager/clients']);
+    this.router.navigate(['manager']);
+    window.location.reload();
   }
   ngOnDestroy() {
-    this.ClientSubscription.unsubscribe();
+    this.localStorage.removeItem('id')
+    if(this.clientSubscription) {
+      this.clientSubscription.unsubscribe();
+    }
   } 
 }

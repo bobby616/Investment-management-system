@@ -23,7 +23,10 @@ export class FundsService {
     ) { }
 
     clientToManageId = this.dataService.currentData.subscribe(client => {
-        this.clientId = client.id;
+        if(client) {
+            this.clientId = client.id;
+        }
+        
     });
 
     public substractFund(modal: ModalDTO) {

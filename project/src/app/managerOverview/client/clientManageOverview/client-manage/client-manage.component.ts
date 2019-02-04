@@ -1,8 +1,10 @@
+import { ClientService } from './../../client.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../../models/client.model';
 import { DataService } from '../../data.service';
 import { Subscription } from 'rxjs';
+import { StorageService } from 'src/app/core/storage.service';
 
 @Component({
   selector: 'app-client-manage',
@@ -15,12 +17,14 @@ export class ClientManageComponent implements OnInit {
   clientSubscription: Subscription
   constructor(private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly dataService: DataService) { }
+    private readonly dataService: DataService,
+    private readonly clientService: ClientService,
+    private readonly localStorage: StorageService) { }
 
   
 
   ngOnInit() {
-    this.clientSubscription = this.dataService.currentData.subscribe(client => {
+   this.clientSubscription= this.clientService.getClient(this.localStorage.getItem('id')).subscribe((client) => {
       this.client = client
     })
   }

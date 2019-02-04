@@ -1,3 +1,4 @@
+import { ClientService } from 'src/app/managerOverview/client/client.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Client } from '../../models/client.model';
@@ -21,6 +22,7 @@ export class ClientPositionsComponent implements OnInit {
   client: Client | undefined;
   clientSubscription: Subscription;
   private overlayNoRowsTemplate;
+  clientId: string;
 
   private columnDefs = [
     { headerName: 'Symbol', field: 'symbol', sortable: true, },
@@ -37,39 +39,39 @@ export class ClientPositionsComponent implements OnInit {
     public dialog: MatDialog,
     private orderService: OrdersService,
     private orderHTTPService: OrdersHttpService,
-    private readonly dataService: DataService,
-    private storageService: StorageService,
+    private readonly clientService: ClientService,
+    private localStorage: StorageService,
   ) {
     this.overlayNoRowsTemplate = "<span>There are no active positions for this client</span>";
   }
 
 
   ngOnInit() {
-    this.clientSubscription = this.dataService.currentData.subscribe(client => {
-      this.client = client;
-    });
-
-    this.gridOptions = <GridOptions>{
-      enableRangeSelection: true,
-      columnDefs: this.columnDefs,
-      onGridReady: () => {
-        this.orderHTTPService.getOrdersByClientId(this.client.id).subscribe((response: []) => {
-          response.forEach((order: OpenOrderDTO) => {
-            const data: any = {};
-            data.symbol = order.company.abbr;
-            data.units = order.units;
-            data.direction = order.direction;
-            data.price = +order.openPrice;
-            data.date = order.opendate;
-            this.rowData.push(data);
+    this.clientId = this.localStorage.getItem('id')
+    this.clientSubscription = this.clientService.getClient(this.localStorage.getItem('id')).subscribe((client) => {
+      this.client = client
+    })
+      this.gridOptions = <GridOptions>{
+        enableRangeSelection: true,
+        columnDefs: this.columnDefs,
+        onGridReady: () => {
+          this.orderHTTPService.getOrdersByClientId(this.clientId).subscribe((response: []) => {
+            response.forEach((order: OpenOrderDTO) => {
+              const data: any = {};
+              data.symbol = order.company.abbr;
+              data.units = order.units;
+              data.direction = order.direction;
+              data.price = +order.openPrice;
+              data.date = order.opendate;
+              this.rowData.push(data);
+            });
+            if (this.gridOptions.api) {
+              this.gridOptions.api.setRowData(this.rowData);
+            }
           });
-          if (this.gridOptions.api) {
-            this.gridOptions.api.setRowData(this.rowData);
-          }
-        });
-        this.gridOptions.rowHeight = 45;
-      }
-    };
+          this.gridOptions.rowHeight = 45;
+        }
+      };
   }
   onRowSelected(event) {
     const instrument = `${event.data.symbol}`;

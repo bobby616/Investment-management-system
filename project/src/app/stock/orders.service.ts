@@ -28,7 +28,9 @@ export class OrdersService {
     ) { }
 
     clientToManageId = this.dataService.currentData.subscribe(client => {
-        this.client = client.id;
+        if(client) {
+            this.client = client.id;
+        }
     });
 
     saveOrder(result: ModalDTO, companyAbbr) {

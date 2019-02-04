@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../../data.service';
 import { Subscription } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
+import { StorageService } from 'src/app/core/storage.service';
 
 @Component(
     {
@@ -29,7 +30,8 @@ export class ClientListComponent implements OnInit {
     constructor(
         private readonly clientService: ClientService,
         private readonly router: Router,
-        private readonly dataService: DataService) {
+        private readonly dataService: DataService,
+        private readonly localStorage: StorageService) {
 
     }
 
@@ -72,6 +74,7 @@ export class ClientListComponent implements OnInit {
         this.clientService.getClient(id).subscribe(client => {
             this.client = client;
             setTimeout(() => {
+                this.localStorage.setItem('id', client.id)
                 this.dataService.changeIsClient(this.client);
                 this.router.navigateByUrl(`/manager/clients/${id}`);
             }, 10)

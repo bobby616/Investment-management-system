@@ -10,6 +10,7 @@ import { AppConfig } from '../common/app.config';
 import { DataService } from '../managerOverview/client/data.service';
 import { PriceService } from '../user/services/prices.service';
 import { CompanyService } from '../user/services/company.service';
+import { NewsService } from '../stock/news.service';
 
 @NgModule({
   providers: [
@@ -23,7 +24,8 @@ import { CompanyService } from '../user/services/company.service';
     AnonymousRouteActivatorService,
     DataService,
     PriceService,
-    CompanyService
+    CompanyService,
+    NewsService
   ]
 })
 export class CoreModule {
