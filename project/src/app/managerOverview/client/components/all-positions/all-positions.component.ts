@@ -28,6 +28,7 @@ export class AllPositionsComponent implements OnInit {
   private columnDefs = [
     { headerName: 'FirstName', field: 'firstName', sortable: true, },
     { headerName: 'LastName', field: 'lastName', sortable: true, },
+    { headerName: 'Company', field: 'name', sortable: true, },
     { headerName: 'Symbol', field: 'symbol', sortable: true, },
     { headerName: 'Units', field: 'units', sortable: true, },
     { headerName: 'Direction', field: 'direction', sortable: true, },
@@ -49,7 +50,7 @@ export class AllPositionsComponent implements OnInit {
     private storageService: StorageService,
     private clientService: ClientService,
   ) {
-    this.overlayNoRowsTemplate = "<span>There are no active positions for this client</span>";
+    this.overlayNoRowsTemplate = "<span>There are no active positions</span>";
   }
 
 
@@ -69,6 +70,7 @@ export class AllPositionsComponent implements OnInit {
               console.log(order);
             data.firstName = client.firstName;
             data.lastName = client.lastName;
+            data.name = order.company.name;
             data.symbol = order.company.abbr;
             data.units = order.units;
             data.direction = order.direction;

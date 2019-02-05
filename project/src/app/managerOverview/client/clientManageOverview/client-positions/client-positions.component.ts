@@ -25,6 +25,7 @@ export class ClientPositionsComponent implements OnInit {
   clientId: string;
 
   private columnDefs = [
+    { headerName: 'Name', field: 'name', sortable: true, },
     { headerName: 'Symbol', field: 'symbol', sortable: true, },
     { headerName: 'Units', field: 'units', sortable: true, },
     { headerName: 'Direction', field: 'direction', sortable: true, },
@@ -74,7 +75,7 @@ export class ClientPositionsComponent implements OnInit {
       };
   }
   onRowSelected(event) {
-    const instrument = `${event.data.symbol}`;
+    const instrument = `${event.data.name}`;
     const dialogRef = this.dialog.open(CloseOrderModalComponent,
       {
         data: {

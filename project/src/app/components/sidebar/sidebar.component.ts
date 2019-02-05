@@ -31,6 +31,7 @@ export class SidebarComponent {
       this.client = client
     })
     this.token = jwt_decode(localStorage.getItem('token'));
+    this.id = localStorage.getItem('id')
   }
 
   logOut() {

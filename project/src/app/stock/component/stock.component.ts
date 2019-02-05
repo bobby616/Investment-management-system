@@ -31,7 +31,7 @@ export class StockComponent implements OnInit {
 
     private columnDefs = [
         { headerName: 'Symbol', field: 'symbol', sortable: true, },
-        { headerName: 'Market', field: 'market', sortable: true, },
+        { headerName: 'Company', field: 'market', sortable: true, },
         { headerName: 'Sell Price ($)', field: 'sellprice', sortable: true, filter: "agNumberColumnFilter" },
         { headerName: 'Buy Price ($)', field: 'buyprice', sortable: true, filter: "agNumberColumnFilter" }
     ];
