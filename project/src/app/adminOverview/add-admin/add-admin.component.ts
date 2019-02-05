@@ -15,10 +15,10 @@ export class AddAdminComponent implements OnInit {
     private readonly adminService: AdminService) { }
 
   ngOnInit() {
-    const firstName = this.formBuilder.control('', [Validators.required]);
-    const lastName = this.formBuilder.control('', [Validators.required]);
-    const password = this.formBuilder.control('', [Validators.required]);
-    const adminEmail = this.formBuilder.control('', [Validators.required]);
+    const firstName = this.formBuilder.control('', [Validators.required, Validators.minLength(2)]);
+    const lastName = this.formBuilder.control('', [Validators.required, Validators.minLength(2)]);
+    const password = this.formBuilder.control('', [Validators.required, Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}/)]);
+    const adminEmail = this.formBuilder.control('', [Validators.required, Validators.email]);
 
     this.registerForm = this.formBuilder.group({
       firstName,

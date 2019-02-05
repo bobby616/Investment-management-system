@@ -16,13 +16,13 @@ export class AddClientComponent implements OnInit {
     private readonly adminService: AdminService) { }
 
   ngOnInit() {
-    const firstName = this.formBuilder.control('', [Validators.required]);
-    const lastName = this.formBuilder.control('', [Validators.required]);
-    const email = this.formBuilder.control('', [Validators.required]);
-    const balance = this.formBuilder.control('', [Validators.required]);
-    const age = this.formBuilder.control('', [Validators.required]);
-    const address = this.formBuilder.control('', [Validators.required]);
-    const managerEmail = this.formBuilder.control('', [Validators.required]);
+    const firstName = this.formBuilder.control('', [Validators.required, Validators.minLength(2)]);
+    const lastName = this.formBuilder.control('', [Validators.required, Validators.minLength(2)]);
+    const email = this.formBuilder.control('', [Validators.required , Validators.email]);
+    const balance = this.formBuilder.control('', [Validators.required, Validators.min(1000)]);
+    const age = this.formBuilder.control('', [Validators.required, Validators.min(18), Validators.max(90)]);
+    const address = this.formBuilder.control('', [Validators.required, Validators.minLength(10)]);
+    const managerEmail = this.formBuilder.control('', [Validators.required, Validators.email]);
 
     this.registerForm = this.formBuilder.group({
       firstName,

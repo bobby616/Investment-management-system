@@ -22,9 +22,9 @@ export class AddManagerComponent implements OnInit {
   // Reactive forms
   ngOnInit() {
     
-    const fullname = this.formBuilder.control('', [Validators.required]);
-    const email = this.formBuilder.control('', [Validators.required]);
-    const password = this.formBuilder.control('', [Validators.required]);
+    const fullname = this.formBuilder.control('', [Validators.required, Validators.minLength(6)]);
+    const email = this.formBuilder.control('', [Validators.required, Validators.email]);
+    const password = this.formBuilder.control('', [Validators.required, Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}/)]);
     this.registerForm = this.formBuilder.group({
       fullname,
       email,
