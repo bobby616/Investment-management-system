@@ -16,7 +16,7 @@ import { StorageService } from 'src/app/core/storage.service';
 })
 export class SidebarComponent {
   token: string;
-  id: string;
+  clientId: string;
   client: Client;
   clientSubscription: Subscription;
   constructor(private readonly authService: AuthenticationService,
@@ -31,7 +31,7 @@ export class SidebarComponent {
       this.client = client
     })
     this.token = jwt_decode(localStorage.getItem('token'));
-    this.id = localStorage.getItem('id')
+    this.clientId = localStorage.getItem('clientId');
   }
 
   logOut() {
@@ -40,16 +40,17 @@ export class SidebarComponent {
   }
 
   onBack(){
-    this.dataService.changeIsClient(null)
-    this.localStorage.removeItem('id')
-    this.client = null;
+    /* this.dataService.changeIsClient(null) */
+    this.localStorage.removeItem('clientId')
+    /* this.client = null; */
     this.router.navigate(['/manager']);
     window.location.reload();
   }
-  ngOnDestroy() {
-    this.localStorage.removeItem('id')
+
+  /* ngOnDestroy() {
+    this.localStorage.removeItem('clientId')
     if(this.clientSubscription) {
       this.clientSubscription.unsubscribe();
     }
-  } 
+  }  */
 }

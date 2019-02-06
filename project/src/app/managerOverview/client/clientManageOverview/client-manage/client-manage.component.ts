@@ -14,7 +14,8 @@ import { StorageService } from 'src/app/core/storage.service';
 export class ClientManageComponent implements OnInit {
 
   client: Client | undefined;
-  clientSubscription: Subscription
+  clientId: string;
+  /* clientSubscription: Subscription */
   constructor(private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly dataService: DataService,
@@ -24,14 +25,18 @@ export class ClientManageComponent implements OnInit {
   
 
   ngOnInit() {
-   this.clientSubscription= this.dataService.currentData.subscribe((client) => {
-      this.client = client
+    this.clientId = this.localStorage.getItem('clientId');
+    this.clientService.getClient('clientId').subscribe((client) => {
+      this.client = client;
     })
+   /* this.clientSubscription= this.dataService.currentData.subscribe((client) => {
+      this.client = client
+    }) */
   }
   ngOnDestroy() {
-    if(this.clientSubscription){
+    /* if(this.clientSubscription){
       this.clientSubscription.unsubscribe();
-    }
+    } */
   }
   onBack(){
     this.router.navigate(['manager/clients', this.client.id]);

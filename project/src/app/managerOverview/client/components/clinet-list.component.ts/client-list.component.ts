@@ -52,7 +52,6 @@ export class ClientListComponent implements OnInit {
 
     ngOnInit(): void {
         this.token = jwt_decode(localStorage.getItem('token'));
-        this.ClientSubscription = this.dataService.currentData.subscribe(isClient => this.client = isClient)
         this.clientsSubscription = this.clientService.getClientsByManagerEmail(this.token.email).subscribe(
             clients => {
                 this.clients = clients;
@@ -73,8 +72,9 @@ export class ClientListComponent implements OnInit {
     manage(id): void {
         this.clientService.getClient(id).subscribe(client => {
             this.client = client;
-                this.localStorage.setItem('id', client.id)
-                this.dataService.changeIsClient(this.client);
+                this.localStorage.setItem('clientId', id);
+                
+                /* this.dataService.changeIsClient(this.client); */
                 this.router.navigateByUrl(`/manager/clients/${id}`);
         })
     }

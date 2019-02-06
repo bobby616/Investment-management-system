@@ -48,10 +48,10 @@ export class ClientPositionsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.clientId = this.localStorage.getItem('id')
-    this.clientSubscription = this.clientService.getClient(this.localStorage.getItem('id')).subscribe((client) => {
+    this.clientId = this.localStorage.getItem('clientId')
+    /* this.clientSubscription = this.clientService.getClient(this.localStorage.getItem('clientId')).subscribe((client) => {
       this.client = client
-    })
+    }) */
       this.gridOptions = <GridOptions>{
         enableRangeSelection: true,
         columnDefs: this.columnDefs,

@@ -59,7 +59,7 @@
 </div>
 
 <!-- manager -->
-<div id="wrapper" *ngIf="token.role === 'manager' && !client">
+<div id="wrapper" *ngIf="token.role === 'manager' && !localStorage.getItem(clientId)">
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
@@ -127,7 +127,7 @@
   </div>
   
 <!--client-->
-<div id="wrapper" *ngIf="client">
+<div id="wrapper" *ngIf="localStorage.getItem(clientId)">
 
   <!-- Sidebar -->
   <div id="sidebar-wrapper">
@@ -136,7 +136,7 @@
         Managing, {{client.firstName}}
       </li>
       <li>
-        <a [routerLink]="['/manager/clients', client.id]">
+        <a [routerLink]="['/manager/clients', clientId]">
           <i class="material-icons sidebar-material-icons">
             attach_money
           </i>
@@ -144,7 +144,7 @@
         </a>
       </li>
       <li>
-        <a [routerLink]="['/manager/clients', client.id , 'positions']">
+        <a [routerLink]="['/manager/clients', clientId , 'positions']">
           <i class="material-icons sidebar-material-icons">
             account_circle
           </i>
@@ -152,7 +152,7 @@
         </a>
       </li>
       <li>
-        <a [routerLink]="['/manager/clients', client.id, 'stock']">
+        <a [routerLink]="['/manager/clients', clientId, 'stock']">
           <i class="material-icons sidebar-material-icons">
             view_list
           </i>
@@ -160,7 +160,7 @@
         </a>
       </li>
       <li>
-        <a [routerLink]="['/watchlist/clients', client.id, 'watchlist']">
+        <a [routerLink]="['/watchlist/clients', clientId, 'watchlist']">
           <i class="material-icons sidebar-material-icons">
             remove_red_eye
           </i>

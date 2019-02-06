@@ -25,6 +25,7 @@ import { ClientService } from 'src/app/managerOverview/client/client.service';
 })
 export class StockComponent implements OnInit {
     public gridOptions: GridOptions;
+    clientId: string = '';
     client: Client | null;
     clientSubscription: Subscription;
     companySubcription: Subscription;
@@ -47,12 +48,15 @@ export class StockComponent implements OnInit {
         private orderService: OrdersService,
         private readonly dataService: DataService,
         private companyService: CompanyService,
+        private readonly localStorage: StorageService,
         private router: Router
     ) { }
+
     ngOnInit() {
-        this.clientSubscription = this.dataService.currentData.subscribe(client => {
+        this.clientId = this.localStorage.getItem('clientId');
+        /* this.clientSubscription = this.dataService.currentData.subscribe(client => {
             this.client = client;
-        });
+        }); */
 
 
         this.gridOptions = <GridOptions>{
@@ -78,7 +82,7 @@ export class StockComponent implements OnInit {
     }
     onRowSelected(event) {
         console.log(event)
-        if (this.client) {
+        if (this.clientId) {
             const instrument = `${event.data.symbol} (${event.data.market})`;
             const dialogRef = this.dialog.open(ModalComponent,
                 {
