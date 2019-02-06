@@ -31,24 +31,23 @@ export class OrdersService {
     client: string = this.localStorage.getItem('clientId')
 
     saveOrder(result: ModalDTO, companyAbbr) {
-        this.stockService.getCompanyByAbbr({ abbr: companyAbbr }).subscribe((companyInfo: CompanyDTO) => {
-            console.log(companyInfo)
+        this.stockService.getCompanyByAbbr({ abbr: companyAbbr }).subscribe((company: CompanyDTO) => {
+            console.log(company)
             const order: CreateOrderDTO = {
                 openDate: result.openDate,
                 openPrice: result.price,
                 units: result.units,
                 clientId: this.client,
-                companyId: companyInfo.id,
+                companyId: company.id,
                 direction: result.direction
             };
-            this.fundsService.user.subscribe((response: Client) => {
-                if (Object.keys(response).length !== 0 && response.funds.currentamount > result.total) {
-                    this.clientService
-                    this.orderHttpService.createOrder(order).pipe(take(1)).subscribe();
+            this.clientService.getClient(this.client).subscribe((currentClient: Client) => {
+                    if (currentClient.funds.currentamount > result.total) {
+                        this.orderHttpService.createOrder(order).subscribe();
+                    }
                     setTimeout(() => {
                         this.notificationService.success('Order is successful');
-                    }, 1000);
-                }
+                    }, 10);
             });
         });
     }
