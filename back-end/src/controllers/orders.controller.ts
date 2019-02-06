@@ -38,8 +38,8 @@ export class OrdersController {
         return this.ordersService.closeOrder(order);
     }
 
-    @Get('/getClosed')
-    async getClosedOrders(@Body() id: string){
+    @Get('/getClosed/:id')
+    async getClosedOrders(@Param('id') id: string){
         return this.ordersService.getClosedOrders(id);
     }
 

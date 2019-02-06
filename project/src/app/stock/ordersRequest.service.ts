@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CreateOrderDTO } from '../models/create-order.model';
 import { OpenOrderDTO } from '../models/open-order.model';
 import { CloseOrderDTO } from '../models/close-order.model';
+import { FinishedOrderDTO } from '../models/finished-order.model';
 
 @Injectable()
 export class OrdersHttpService {
@@ -19,6 +20,10 @@ export class OrdersHttpService {
 
     public getOrdersByClientId(clientId: string): Observable<OpenOrderDTO[]> {
         return this.http.get<OpenOrderDTO[]>(`${this.app.apiUrl}/orders/getOpen/${clientId}`);
+    }
+
+    public getClosedOrdersByClientId(clientId: string): Observable<FinishedOrderDTO[]> {
+        return this.http.get<FinishedOrderDTO[]>(`${this.app.apiUrl}/orders/getClosed/${clientId}`);
     }
 
     public closeOrder(orderCloseInfo: CloseOrderDTO): Observable<object>{

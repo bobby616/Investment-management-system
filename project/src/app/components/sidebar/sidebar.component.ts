@@ -19,11 +19,10 @@ export class SidebarComponent {
   clientId: string = '';
   client: Client;
   clientSubscription: Subscription;
-  constructor(private readonly authService: AuthenticationService,
-    private readonly route: ActivatedRoute,
+  constructor(
+    private readonly authService: AuthenticationService,
     private readonly clientService: ClientService,
     private readonly router: Router,
-    private readonly dataService: DataService,
     private readonly localStorage: StorageService) { }
 
   ngOnInit() {
@@ -40,17 +39,9 @@ export class SidebarComponent {
   }
 
   onBack(){
-    /* this.dataService.changeIsClient(null) */
     this.localStorage.removeItem('clientId')
-    /* this.client = null; */
     this.router.navigate(['/manager']);
     window.location.reload();
   }
 
-  /* ngOnDestroy() {
-    this.localStorage.removeItem('clientId')
-    if(this.clientSubscription) {
-      this.clientSubscription.unsubscribe();
-    }
-  }  */
 }

@@ -100,14 +100,6 @@
           </a>
         </li>
         <li>
-          <a [routerLink]="['/history']">
-            <i class="material-icons sidebar-material-icons">
-              history
-            </i>
-            <small class="sidebar-text">History</small>
-          </a>
-        </li>
-        <li>
           <a (click)="logOut()" style="cursor: pointer">
             <i class="material-icons sidebar-material-icons">
               exit_to_app
@@ -160,11 +152,11 @@
         </a>
       </li>
       <li>
-        <a [routerLink]="['/watchlist/clients', clientId, 'watchlist']">
+        <a [routerLink]="['/manager/clients', clientId, 'history']">
           <i class="material-icons sidebar-material-icons">
-            remove_red_eye
+            history
           </i>
-          <small class="sidebar-text">Watchlist</small>
+          <small class="sidebar-text">History</small>
         </a>
       </li>
       <li>

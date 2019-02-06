@@ -15,6 +15,7 @@ import { FundsService } from 'src/app/stock/funds.service';
 import { FundsHttpService } from 'src/app/stock/fundsReques.service';
 import { OrdersHttpService } from 'src/app/stock/ordersRequest.service';
 import { OrdersService } from 'src/app/stock/orders.service';
+import { ClientHistoryComponent } from './client-history/client-history.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { OrdersService } from 'src/app/stock/orders.service';
     ClientManageComponent,
     ClientPositionsComponent,
     CloseOrderModalComponent,
+    ClientHistoryComponent,
   ],
   providers: [ClientService ,StocksService, FundsService, FundsHttpService,
     OrdersHttpService, OrdersService, ClientService],
