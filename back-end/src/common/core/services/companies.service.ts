@@ -99,9 +99,10 @@ export class CompaniesService {
     async getCompanyById(id) {
         return await this.companyRepository.findOne({id})
     }
-    async getCompany(companySymbol: string) {
+    
+    async getCompany(companySymbol) {
         try {
-            const company = await this.companyRepository.findOne({ where: { abbr: companySymbol } });
+            const company = await this.companyRepository.findOne({ where: { abbr: companySymbol.abbr } });
             return company;
         } catch (error) {
             throw new BadRequestException('No company to show');

@@ -26,7 +26,7 @@ export class ClientManageComponent implements OnInit {
 
   ngOnInit() {
     this.clientId = this.localStorage.getItem('clientId');
-    this.clientService.getClient('clientId').subscribe((client) => {
+    this.clientService.getClient(this.clientId).subscribe((client) => {
       this.client = client;
     })
    /* this.clientSubscription= this.dataService.currentData.subscribe((client) => {
@@ -37,9 +37,6 @@ export class ClientManageComponent implements OnInit {
     /* if(this.clientSubscription){
       this.clientSubscription.unsubscribe();
     } */
-  }
-  onBack(){
-    this.router.navigate(['manager/clients', this.client.id]);
   }
 
 

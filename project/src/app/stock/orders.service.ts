@@ -13,10 +13,10 @@ import { take } from 'rxjs/operators';
 import { ClientService } from '../managerOverview/client/client.service';
 import { CloseOrderDTO } from '../models/close-order.model';
 import { StockDTO } from '../models/stock.dto';
+import { StorageService } from '../core/storage.service';
 
 @Injectable()
 export class OrdersService {
-    client: string;
 
     constructor(
         private notificationService: NotificatorService,
@@ -25,13 +25,10 @@ export class OrdersService {
         private fundsService: FundsService,
         private readonly dataService: DataService,
         private clientService: ClientService,
+        private localStorage: StorageService
     ) { }
 
-    clientToManageId = this.dataService.currentData.subscribe(client => {
-        if(client) {
-            this.client = client.id;
-        }
-    });
+    client: string = this.localStorage.getItem('clientId')
 
     saveOrder(result: ModalDTO, companyAbbr) {
         this.stockService.getCompanyByAbbr({ abbr: companyAbbr }).subscribe((companyInfo: CompanyDTO) => {
@@ -65,6 +62,7 @@ export class OrdersService {
                     this.fundsService
                         .updateFunds({ id: this.client, amount: updatedOrder.result});
                         this.notificationService.success('Position closed');
+                        //window.location.reload();
                 });
             });
         });

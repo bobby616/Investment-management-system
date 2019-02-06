@@ -34,7 +34,7 @@ export class ClientPositionsComponent implements OnInit {
   ];
   private defaultColDef = { width: 300, filter: true };
   private rowData = [];
-  private rowSelection = 'single';
+  private rowSelection = 'multiple';
 
   constructor(
     public dialog: MatDialog,
@@ -48,16 +48,13 @@ export class ClientPositionsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.clientId = this.localStorage.getItem('clientId')
-    /* this.clientSubscription = this.clientService.getClient(this.localStorage.getItem('clientId')).subscribe((client) => {
-      this.client = client
-    }) */
+    this.clientId = this.localStorage.getItem('clientId');
       this.gridOptions = <GridOptions>{
         enableRangeSelection: true,
         columnDefs: this.columnDefs,
         onGridReady: () => {
-          this.orderHTTPService.getOrdersByClientId(this.clientId).subscribe((response: []) => {
-            response.forEach((order: OpenOrderDTO) => {
+          this.orderHTTPService.getOrdersByClientId(this.clientId).subscribe((content: []) => {
+            content.forEach((order: OpenOrderDTO) => {
               const data: any = {};
               data.name = order.company.name;
               data.symbol = order.company.abbr;
@@ -94,7 +91,7 @@ export class ClientPositionsComponent implements OnInit {
           companyId: '',
           closePrice: '',
         };
-        this.orderService.closeOrder(closeOrder, event.data.symbol);
+        this.orderService.closeOrder(closeOrder, event.data.symbol)
       }
     });
   }

@@ -8,26 +8,22 @@ import { UserInfoDTO } from '../models/user-info.model';
 import { Client } from '../managerOverview/client/models/client.model';
 import { DataService } from '../managerOverview/client/data.service';
 import { AddSubstractDTO } from '../models/add-substract.motel';
+import { StorageService } from '../core/storage.service';
 
 @Injectable()
 export class FundsService {
     
     public user = new BehaviorSubject<object>({});
-    clientId: string;
     
     constructor(
         private notificationService: NotificatorService,
         private fundsHttpService: FundsHttpService,
         private clientService: ClientService,
         private readonly dataService: DataService,
+        private readonly localStorage: StorageService,
     ) { }
 
-    clientToManageId = this.dataService.currentData.subscribe(client => {
-        if(client) {
-            this.clientId = client.id;
-        }
-        
-    });
+    clientId: string = this.localStorage.getItem('clientId')
 
     public substractFund(modal: ModalDTO) {
         const clientCred = {
