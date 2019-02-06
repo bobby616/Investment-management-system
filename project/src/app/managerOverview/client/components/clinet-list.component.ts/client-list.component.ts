@@ -73,9 +73,9 @@ export class ClientListComponent implements OnInit {
         this.clientService.getClient(id).subscribe(client => {
             this.client = client;
                 this.localStorage.setItem('clientId', id);
-                
-                /* this.dataService.changeIsClient(this.client); */
-                this.router.navigateByUrl(`/manager/clients/${id}`);
+                    /* this.dataService.changeIsClient(this.client); */
+                this.router.navigate([`manager/clients/${id}`]);
+                window.location.reload();
         })
     }
 }

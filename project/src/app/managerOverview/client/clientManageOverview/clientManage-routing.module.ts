@@ -6,7 +6,7 @@ import { ClientPositionsComponent } from './client-positions/client-positions.co
 
 const routes: Routes = [
     {
-      path: '', component: ClientManageComponent,
+      path: '', component: ClientManageComponent, pathMatch: 'full'
     },
     {
       path: 'stock', component: StockComponent,

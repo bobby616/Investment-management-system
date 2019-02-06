@@ -16,7 +16,7 @@ import { StorageService } from 'src/app/core/storage.service';
 })
 export class SidebarComponent {
   token: string;
-  clientId: string;
+  clientId: string = '';
   client: Client;
   clientSubscription: Subscription;
   constructor(private readonly authService: AuthenticationService,
@@ -27,11 +27,11 @@ export class SidebarComponent {
     private readonly localStorage: StorageService) { }
 
   ngOnInit() {
-    this.clientSubscription= this.clientService.getClient(this.localStorage.getItem('id')).subscribe((client) => {
-      this.client = client
-    })
     this.token = jwt_decode(localStorage.getItem('token'));
     this.clientId = localStorage.getItem('clientId');
+    this.clientSubscription= this.clientService.getClient(this.clientId).subscribe((client) => {
+      this.client = client;
+    })
   }
 
   logOut() {

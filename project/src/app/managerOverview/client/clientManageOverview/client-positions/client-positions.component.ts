@@ -59,6 +59,7 @@ export class ClientPositionsComponent implements OnInit {
           this.orderHTTPService.getOrdersByClientId(this.clientId).subscribe((response: []) => {
             response.forEach((order: OpenOrderDTO) => {
               const data: any = {};
+              data.name = order.company.name;
               data.symbol = order.company.abbr;
               data.units = order.units;
               data.direction = order.direction;
