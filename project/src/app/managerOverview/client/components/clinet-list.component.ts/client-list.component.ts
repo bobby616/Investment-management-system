@@ -76,7 +76,6 @@ export class ClientListComponent implements OnInit {
                 this.localStorage.setItem('id', client.id)
                 this.dataService.changeIsClient(this.client);
                 this.router.navigateByUrl(`/manager/clients/${id}`);
-            
         })
     }
 }

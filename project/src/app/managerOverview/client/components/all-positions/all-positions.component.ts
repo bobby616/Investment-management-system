@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/stock/orders.service';
 import { MatDialog } from '@angular/material';
-import { OrdersHttpService } from 'src/app/stock/ordersHTTP.service';
+import { OrdersHttpService } from 'src/app/stock/ordersRequest.service';
 import { DataService } from '../../data.service';
 import { StorageService } from 'src/app/core/storage.service';
 import { GridOptions } from 'ag-grid-community';
@@ -38,7 +38,7 @@ export class AllPositionsComponent implements OnInit {
 
   private defaultColDef = { width: 300, filter: true };
   private rowData = [];
-  private rowSelection = 'single';
+  /* private rowSelection = 'single'; */
   private gridApi;
   private gridColumnApi;
 
@@ -66,17 +66,17 @@ export class AllPositionsComponent implements OnInit {
           response.forEach((client: ClientWithOrders) => {
             const data: any = {};
             console.log(client);
-            client.orders.forEach((order: OpenOrderDTO) =>{
+            client.orders.forEach((order: OpenOrderDTO) => {
               console.log(order);
-            data.firstName = client.firstName;
-            data.lastName = client.lastName;
-            data.name = order.company.name;
-            data.symbol = order.company.abbr;
-            data.units = order.units;
-            data.direction = order.direction;
-            data.price = +order.openPrice;
-            data.date = order.opendate;
-            this.rowData.push(data);
+              data.firstName = client.firstName;
+              data.lastName = client.lastName;
+              data.name = order.company.name;
+              data.symbol = order.company.abbr;
+              data.units = order.units;
+              data.direction = order.direction;
+              data.price = +order.openPrice;
+              data.date = order.opendate;
+              this.rowData.push(data);
             });
           });
           if (this.gridOptions.api) {
@@ -88,27 +88,7 @@ export class AllPositionsComponent implements OnInit {
     };
   }
 
-  /* onRowSelected(event) {
-    const instrument = `${event.data.symbol}`;
-    const dialogRef = this.dialog.open(CloseOrderModalComponent,
-      {
-        data: {
-          name: instrument,
-          openPrice: +event.data.price,
-        }
-      });
-
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result) {
-        const closeOrder: CloseOrderDTO = {
-          price: event.data.price,
-          units: event.data.units,
-          direction: event.data.direction,
-          companyId: '',
-          closePrice: '',
-        };
-        this.orderService.closeOrder(closeOrder, event.data.symbol);
-      }
-    });
-  } */
+  onRowSelected(event) {
+    console.log(event);
+  }
 }

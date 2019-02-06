@@ -7,12 +7,12 @@ import { PricesService } from 'src/common/core/services/prices.service';
 import { Price } from 'src/data/entities/prices.entity';
 import { PriceRequestDTO } from 'src/models/prices/price-request.dto';
 
-@Controller('prices')
+@Controller('price222s')
 export class PricesController {
 
     constructor(private readonly pricesService: PricesService) {}
 
-    @Get()
+   /*  @Get()
     @Roles('manager')
     @UseGuards(AuthGuard(), RolesGuard)
     async getLatestForAllCompanies(): Promise<Price[]> {
@@ -28,12 +28,6 @@ export class PricesController {
     })) priceRequest: PriceRequestDTO): Promise<object> {
 
     return await this.pricesService.getCompanyPrices(priceRequest.id, priceRequest.lastN, priceRequest.startdate, priceRequest.enddate);
-    }
+    } */
 
-    @Get('chart/:id')
-    @Roles('manager')
-    @UseGuards(AuthGuard(), RolesGuard)
-    async getChartPrices(@Param('id') id: string): Promise<Price[]> {
-        return await this.pricesService.getPricesByCompany(id)
-    }
 }

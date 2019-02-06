@@ -12,8 +12,8 @@ import { AgGridModule } from 'ag-grid-angular';
 import { MatSelectModule, MatDialogModule, MatInputModule, MatTableModule } from '@angular/material';
 import { StocksService } from 'src/app/stock/stock.service';
 import { FundsService } from 'src/app/stock/funds.service';
-import { FundsHttpService } from 'src/app/stock/fundsHTTP.service';
-import { OrdersHttpService } from 'src/app/stock/ordersHTTP.service';
+import { FundsHttpService } from 'src/app/stock/fundsReques.service';
+import { OrdersHttpService } from 'src/app/stock/ordersRequest.service';
 import { OrdersService } from 'src/app/stock/orders.service';
 
 

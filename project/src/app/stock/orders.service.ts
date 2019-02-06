@@ -4,7 +4,7 @@ import { StocksService } from './stock.service';
 import { FundsService } from './funds.service';
 import { ModalDTO } from '../models/modal.model';
 import { CreateOrderDTO } from '../models/create-order.model';
-import { OrdersHttpService } from './ordersHTTP.service';
+import { OrdersHttpService } from './ordersRequest.service';
 import { CompanyDTO } from '../models/company.model';
 import { UserInfoDTO } from '../models/user-info.model';
 import { DataService } from '../managerOverview/client/data.service';

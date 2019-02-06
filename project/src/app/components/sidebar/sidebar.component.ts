@@ -43,7 +43,7 @@ export class SidebarComponent {
     this.dataService.changeIsClient(null)
     this.localStorage.removeItem('id')
     this.client = null;
-    this.router.navigate(['manager']);
+    this.router.navigate(['/manager']);
     window.location.reload();
   }
   ngOnDestroy() {

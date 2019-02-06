@@ -5,7 +5,7 @@ import { Client } from '../../models/client.model';
 import { DataService } from '../../data.service';
 import { GridOptions } from 'ag-grid-community';
 import { OpenOrderDTO } from 'src/app/models/open-order.model';
-import { OrdersHttpService } from 'src/app/stock/ordersHTTP.service';
+import { OrdersHttpService } from 'src/app/stock/ordersRequest.service';
 import { StorageService } from 'src/app/core/storage.service';
 import { MatDialog } from '@angular/material';
 import { CloseOrderModalComponent } from './client-positions-modal/close-order-modal.component';

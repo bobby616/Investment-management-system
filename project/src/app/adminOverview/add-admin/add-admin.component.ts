@@ -34,7 +34,6 @@ export class AddAdminComponent implements OnInit {
       email: this.registerForm.value.adminEmail,
       password: this.registerForm.value.password,
     }
-    console.log(admin);
 
     this.adminService.createAdmin(admin);
 

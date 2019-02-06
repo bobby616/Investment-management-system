@@ -53,7 +53,6 @@ export class StockComponent implements OnInit {
         this.clientSubscription = this.dataService.currentData.subscribe(client => {
             this.client = client;
         });
-        // this.storageService.setItem('clientId', this.client.id);
 
 
         this.gridOptions = <GridOptions>{
@@ -78,39 +77,39 @@ export class StockComponent implements OnInit {
         };
     }
     onRowSelected(event) {
-      console.log(event)
-      if(this.client) {
-        const instrument = `${event.data.symbol} (${event.data.market})`;
-        const dialogRef = this.dialog.open(ModalComponent,
-            {
-                data: {
-                    name: instrument,
-                    buyprice: +event.data.buyprice,
-                    sellprice: +event.data.sellprice
+        console.log(event)
+        if (this.client) {
+            const instrument = `${event.data.symbol} (${event.data.market})`;
+            const dialogRef = this.dialog.open(ModalComponent,
+                {
+                    data: {
+                        name: instrument,
+                        buyprice: +event.data.buyprice,
+                        sellprice: +event.data.sellprice
+                    }
+                });
+
+            dialogRef.afterClosed().subscribe((result: ModalDTO) => {
+                if (result) {
+                    if (isNaN(result.total)) {
+                        return this.notification.error('Invalid unit or price');
+                    }
+
+                    this.fundsService.substractFund(result);
+                    this.orderService.saveOrder(result, event.data.symbol);
                 }
             });
-
-        dialogRef.afterClosed().subscribe((result: ModalDTO) => {
-            if (result) {
-                if (isNaN(result.total)) {
-                    return this.notification.error('Invalid unit or price');
-                }
-                
-                this.fundsService.substractFund(result);
-                this.orderService.saveOrder(result, event.data.symbol);
-            }
-        });
-      } 
-      else {
-          this.companySubcription = this.companyService.getCompanyByAbb(event.data.symbol).subscribe((data) => {
-              console.log(event.data.symbol)
-          this.companyService.changeId(data.id);
-          this.router.navigate(['/manager/stock/chart'])
-        })
-      }
+        }
+        else {
+            this.companySubcription = this.companyService.getCompanyByAbb(event.data.symbol).subscribe((data) => {
+                console.log(event.data.symbol)
+                this.companyService.changeId(data.id);
+                this.router.navigate(['/manager/stock/chart'])
+            })
+        }
     }
     ngOnDestroy() {
-        if(this.companySubcription) {
+        if (this.companySubcription) {
             this.companySubcription.unsubscribe()
         }
     }

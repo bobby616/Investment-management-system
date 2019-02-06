@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { NotificatorService } from '../core/notificator.service';
-import { FundsHttpService } from './fundsHTTP.service';
+import { FundsHttpService } from './fundsReques.service';
 import { ClientService } from '../managerOverview/client/client.service';
 import { ModalDTO } from '../models/modal.model';
 import { UserInfoDTO } from '../models/user-info.model';

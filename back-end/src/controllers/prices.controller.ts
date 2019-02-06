@@ -41,4 +41,11 @@ export class PricesController {
 
         return await this.priceService.getCompanyPrices(priceRequest.id, priceRequest.lastN, priceRequest.startdate, priceRequest.enddate);
     }
+
+    @Get('chart/:id')
+    @Roles('manager')
+    /* @UseGuards(AuthGuard(), RolesGuard) */
+    async getChartPrices(@Param('id') id: string): Promise<Price[]> {
+        return await this.priceService.getPricesByCompany(id)
+    }
 }
