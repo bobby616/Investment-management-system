@@ -108,4 +108,13 @@ export class CompaniesService {
             throw new BadRequestException('No company to show');
         }
     }
+
+    async getCompanyByAB(companySymbol) {
+        try {
+            const company = await this.companyRepository.findOne({ where: { abbr: companySymbol } });
+            return company;
+        } catch (error) {
+            throw new BadRequestException('No company to show');
+        }
+    }
 }

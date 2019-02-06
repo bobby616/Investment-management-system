@@ -11,6 +11,6 @@ export class CompanyController {
 
     @Get('/:abb')
     async getCompanyByAbb(@Param('abb') abb: string): Promise<Company> {
-       return await this.companyService.getCompany(abb)
+    return await this.companyService.getCompanyByAB(abb);
     }
 }

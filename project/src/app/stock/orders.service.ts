@@ -62,7 +62,7 @@ export class OrdersService {
                     this.fundsService
                         .updateFunds({ id: this.client, amount: updatedOrder.result});
                         this.notificationService.success('Position closed');
-                        //window.location.reload();
+                        window.location.reload();
                 });
             });
         });

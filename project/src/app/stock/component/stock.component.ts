@@ -105,8 +105,9 @@ export class StockComponent implements OnInit {
             });
         }
         else {
+            console.log(event.data.symbol)
             this.companySubcription = this.companyService.getCompanyByAbb(event.data.symbol).subscribe((data) => {
-                console.log(event.data.symbol)
+                console.log(data)
                 this.companyService.changeId(data.id);
                 this.router.navigate(['/manager/stock/chart'])
             })

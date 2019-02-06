@@ -32,9 +32,9 @@ export class ClientPositionsComponent implements OnInit {
     { headerName: 'Open Price', field: 'price', sortable: true, },
     { headerName: 'Date', field: 'date', sortable: true, },
   ];
-  private defaultColDef = { width: 300, filter: true };
+  private defaultColDef = { width: 200, filter: true };
   private rowData = [];
-  private rowSelection = 'multiple';
+  private rowSelection = 'single';
 
   constructor(
     public dialog: MatDialog,
