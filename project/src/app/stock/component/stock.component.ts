@@ -41,22 +41,19 @@ export class StockComponent implements OnInit {
     private rowSelection = 'single';
 
     constructor(
-        private stockService: StocksService,
-        public dialog: MatDialog,
-        private notification: NotificatorService,
-        private fundsService: FundsService,
-        private orderService: OrdersService,
+        private readonly stockService: StocksService,
+        private readonly dialog: MatDialog,
+        private readonly notification: NotificatorService,
+        private readonly fundsService: FundsService,
+        private readonly orderService: OrdersService,
         private readonly dataService: DataService,
-        private companyService: CompanyService,
+        private readonly companyService: CompanyService,
         private readonly localStorage: StorageService,
-        private router: Router
+        private readonly router: Router
     ) { }
 
     ngOnInit() {
         this.clientId = this.localStorage.getItem('clientId');
-        /* this.clientSubscription = this.dataService.currentData.subscribe(client => {
-            this.client = client;
-        }); */
 
 
         this.gridOptions = <GridOptions>{
@@ -81,7 +78,6 @@ export class StockComponent implements OnInit {
         };
     }
     onRowSelected(event) {
-        console.log(event)
         if (this.clientId) {
             const instrument = `${event.data.symbol} (${event.data.market})`;
             const dialogRef = this.dialog.open(ModalComponent,
@@ -105,9 +101,7 @@ export class StockComponent implements OnInit {
             });
         }
         else {
-            console.log(event.data.symbol)
             this.companySubcription = this.companyService.getCompanyByAbb(event.data.symbol).subscribe((data) => {
-                console.log(data)
                 this.companyService.changeId(data.id);
                 this.router.navigate(['/manager/stock/chart'])
             })

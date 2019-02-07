@@ -19,7 +19,6 @@ export class AddManagerComponent implements OnInit {
   ) { }
 
 
-  // Reactive forms
   ngOnInit() {
     
     const fullname = this.formBuilder.control('', [Validators.required, Validators.minLength(6)]);

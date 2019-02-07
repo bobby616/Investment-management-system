@@ -7,8 +7,8 @@ import { StockDTO } from '../models/stock.dto';
 @Injectable()
 export class StocksService {
     constructor(
-        private http: HttpClient,
-        private appConfig: AppConfig,
+        private readonly http: HttpClient,
+        private readonly appConfig: AppConfig,
     ) { }
 
     public getStocks(): Observable<object> {

@@ -5,7 +5,6 @@ import { RequesterService } from './requester.service';
 import { StorageService } from './storage.service';
 import { NotificatorService } from './notificator.service';
 import { AuthService } from '../auth/auth.service';
-import { SearchService } from './search.service';
 import { AppConfig } from '../common/app.config';
 import { DataService } from '../managerOverview/client/data.service';
 import { PriceService } from '../user/services/prices.service';
@@ -19,7 +18,6 @@ import { NewsService } from '../stock/news.service';
     StorageService,
     NotificatorService,
     AuthService,
-    SearchService,
     AuthRouteActivatorService,
     AnonymousRouteActivatorService,
     DataService,

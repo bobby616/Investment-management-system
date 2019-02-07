@@ -19,13 +19,13 @@ import { StorageService } from '../core/storage.service';
 export class OrdersService {
 
     constructor(
-        private notificationService: NotificatorService,
-        private orderHttpService: OrdersHttpService,
-        private stockService: StocksService,
-        private fundsService: FundsService,
+        private readonly notificationService: NotificatorService,
+        private readonly orderHttpService: OrdersHttpService,
+        private readonly stockService: StocksService,
+        private readonly fundsService: FundsService,
         private readonly dataService: DataService,
-        private clientService: ClientService,
-        private localStorage: StorageService
+        private readonly clientService: ClientService,
+        private readonly localStorage: StorageService
     ) { }
 
     client: string = this.localStorage.getItem('clientId')

@@ -14,20 +14,14 @@ import { Role } from '../models/roles';
 export class ManagerGuard implements CanActivate {
 
     constructor(
-        public auth: AuthenticationService,
-        public router: Router) {
+        private auth: AuthenticationService,
+        private router: Router) {
     }
 
     canActivate(): boolean {
-
-
         if (Role.manager === this.auth.getRole()) {
-            // this.router.navigate(['/']);
             return true;
         }
-
-        // da se napravi 
-        /* this.router.navigate(['unauthorised']);  */ 
         return false;
     }
 }
