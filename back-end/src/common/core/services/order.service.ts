@@ -81,7 +81,7 @@ export class OrderService {
     async closeOrder(closeOrder: CloseOrderDTO): Promise<Order> {
         try {
             const order: Order = await this.orderRepository.findOne({
-                where: { company: closeOrder.companyId, units: closeOrder.units, openPrice: closeOrder.price, direction: closeOrder.direction },
+                where: { id: closeOrder.id, company: closeOrder.companyId, units: closeOrder.units, openPrice: closeOrder.price, direction: closeOrder.direction },
             });
 
             order.closedate = new Date();

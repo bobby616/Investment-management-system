@@ -6,8 +6,6 @@ import { StockDTO } from '../models/stock.dto';
 
 @Injectable()
 export class StocksService {
-
-    private stock = new BehaviorSubject<object>({});
     constructor(
         private http: HttpClient,
         private appConfig: AppConfig,
@@ -25,6 +23,7 @@ export class StocksService {
     public getCompanyByAbbr(companyAbbr): Observable<object> {
         return this.http.post(`${this.appConfig.apiUrl}/stocks/abbreviature`, companyAbbr);
     }
+
     getStockData(): any[] {
         const stocksData = [];
         let marketData = [];

@@ -14,8 +14,8 @@ export class OrdersHttpService {
         private app: AppConfig,
     ) { }
 
-    public createOrder(orderInfo: CreateOrderDTO): Observable<object> {
-        return this.http.post(`${this.app.apiUrl}/orders/create`, orderInfo);
+    public createOrder(order: CreateOrderDTO): Observable<object> {
+        return this.http.post(`${this.app.apiUrl}/orders/create`, order);
     }
 
     public getOrdersByClientId(clientId: string): Observable<OpenOrderDTO[]> {

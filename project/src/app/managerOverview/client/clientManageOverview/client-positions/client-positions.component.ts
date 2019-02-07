@@ -31,6 +31,7 @@ export class ClientPositionsComponent implements OnInit {
     { headerName: 'Direction', field: 'direction', sortable: true, },
     { headerName: 'Open Price', field: 'price', sortable: true, },
     { headerName: 'Date', field: 'date', sortable: true, },
+    { headerName: 'OrderId', field: 'id', sortable: true, },
   ];
   private defaultColDef = { width: 200, filter: true };
   private rowData = [];
@@ -62,6 +63,7 @@ export class ClientPositionsComponent implements OnInit {
               data.direction = order.direction;
               data.price = +order.openPrice;
               data.date = order.opendate;
+              data.id = order.id;
               this.rowData.push(data);
             });
             if (this.gridOptions.api) {
@@ -90,6 +92,7 @@ export class ClientPositionsComponent implements OnInit {
           direction: event.data.direction,
           companyId: '',
           closePrice: '',
+          id: event.data.id,
         };
         this.orderService.closeOrder(closeOrder, event.data.symbol)
       }

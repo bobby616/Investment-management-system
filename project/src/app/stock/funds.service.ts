@@ -12,11 +12,8 @@ import { StorageService } from '../core/storage.service';
 
 @Injectable()
 export class FundsService {
-    
-    public user = new BehaviorSubject<object>({});
-    
     constructor(
-        private notificationService: NotificatorService,
+        private notificator: NotificatorService,
         private fundsHttpService: FundsHttpService,
         private clientService: ClientService,
         private readonly dataService: DataService,
@@ -33,10 +30,9 @@ export class FundsService {
         this.clientService.getClient(clientCred.id).subscribe(
             (currentClient: Client) => {
                 if (currentClient.funds.currentamount < clientCred.amount) {
-                    return this.notificationService.error('Transaction failed due to not sufficient funds',);
+                    return this.notificator.error('Transaction failed due to insufficient funds');
                 }
                 this.fundsHttpService.substractFund(clientCred).subscribe();
-                this.user.next(currentClient);
             }
         );
     }
