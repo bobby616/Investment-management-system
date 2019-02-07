@@ -5,30 +5,22 @@ import { ServerErrorComponent } from './components/server-error/server-errror.co
 import { AdminGuard } from './core/admin-guard';
 import { ManagerGuard } from './core/manager-guard';
 import { LoginComponent } from './auth/login/login.component';
-const routes: Routes = [
 
+const routes: Routes = [
   {
-    path: '', redirectTo: '/login', pathMatch: 'full' /* canActivate: [RoleGuard], */
+    path: '', redirectTo: '/login', pathMatch: 'full'  
   },
   {
     path: 'admin', loadChildren: './adminOverview/admin.module#AdminModule',
     canActivate: [AdminGuard],
   },
   {
-    path: 'manager', /* component: HomeComponent, */
+    path: 'manager', 
     loadChildren: './managerOverview/manager.module#ManagerModule',
     canActivate: [ManagerGuard],
   },
 
-
-  /* { path: '', redirectTo: '/login', pathMatch: 'full'}, */
-  /* { path: 'home', component: HomeComponent}, */
-
-
-  { path: 'login', component: LoginComponent }, /*
-  { path: 'users', loadChildren: './user/user.module#UserModule' },
-  { path: 'clients', loadChildren: './client/client.module#ClientModule' },
-  { path: 'stock', loadChildren: './stock/stock.module#StockModule' }, */
+  { path: 'login', component: LoginComponent }, 
 
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },

@@ -59,8 +59,8 @@ export class AllPositionsComponent implements OnInit {
       onGridReady: () => {
         this.clientService.getClientsByManagerEmail(this.token.email).subscribe((response: []) => {
           response.forEach((client: ClientWithOrders) => {
-            const data: any = {};
             client.orders.forEach((order: OpenOrderDTO) => {
+              const data: any = {};
               data.firstName = client.firstName;
               data.lastName = client.lastName;
               data.name = order.company.name;
