@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class NewsService {
     constructor(
-        private http: HttpClient,
+        private readonly http: HttpClient,
     ) { }
 
     public getNews(): Observable<object> {

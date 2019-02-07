@@ -45,7 +45,6 @@ export class AddClientComponent implements OnInit {
       address: this.registerForm.value.address,
       managerEmail: this.registerForm.value.managerEmail,
     }
-    console.log(client);
 
     this.adminService.createClient(client);
 

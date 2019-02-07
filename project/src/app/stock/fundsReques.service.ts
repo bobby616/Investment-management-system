@@ -8,8 +8,8 @@ import { AddSubstractDTO } from '../models/add-substract.motel';
 @Injectable()
 export class FundsHttpService {
     constructor(
-        private http: HttpClient,
-        private appConfig: AppConfig,
+        private readonly http: HttpClient,
+        private readonly appConfig: AppConfig,
     ) { }
 
     public substractFund(clientCred: AddSubstractDTO): Observable<object> {

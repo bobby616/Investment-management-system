@@ -13,9 +13,9 @@ import { StorageService } from '../core/storage.service';
 @Injectable()
 export class FundsService {
     constructor(
-        private notificator: NotificatorService,
-        private fundsHttpService: FundsHttpService,
-        private clientService: ClientService,
+        private readonly notificator: NotificatorService,
+        private readonly fundsHttpService: FundsHttpService,
+        private readonly clientService: ClientService,
         private readonly dataService: DataService,
         private readonly localStorage: StorageService,
     ) { }

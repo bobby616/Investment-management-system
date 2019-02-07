@@ -38,17 +38,12 @@ export class AllPositionsComponent implements OnInit {
 
   private defaultColDef = { width: 300, filter: true };
   private rowData = [];
-  /* private rowSelection = 'single'; */
   private gridApi;
   private gridColumnApi;
 
   constructor(
     public dialog: MatDialog,
-    private orderService: OrdersService,
-    private orderHTTPService: OrdersHttpService,
-    private readonly dataService: DataService,
-    private storageService: StorageService,
-    private clientService: ClientService,
+    private readonly clientService: ClientService,
   ) {
     this.overlayNoRowsTemplate = "<span>There are no active positions</span>";
   }
@@ -64,10 +59,8 @@ export class AllPositionsComponent implements OnInit {
       onGridReady: () => {
         this.clientService.getClientsByManagerEmail(this.token.email).subscribe((response: []) => {
           response.forEach((client: ClientWithOrders) => {
-            const data: any = {};
-            console.log(client);
             client.orders.forEach((order: OpenOrderDTO) => {
-              console.log(order);
+              const data: any = {};
               data.firstName = client.firstName;
               data.lastName = client.lastName;
               data.name = order.company.name;
@@ -88,7 +81,4 @@ export class AllPositionsComponent implements OnInit {
     };
   }
 
-  onRowSelected(event) {
-    console.log(event);
-  }
 }

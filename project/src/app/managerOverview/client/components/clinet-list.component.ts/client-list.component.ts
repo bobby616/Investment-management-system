@@ -16,21 +16,19 @@ import { StorageService } from 'src/app/core/storage.service';
 )
 
 export class ClientListComponent implements OnInit {
-    pageTitle = 'Clients list';
-    token: any;
-    imageWidth = 50;
-    imageMargin = 2;
-    showImage = false;
-    errorMessage = '';
-    filteredClients: Client[] = [];
-    clients: Client[] = [];
-    client: Client;
-    ClientSubscription: Subscription;
-    clientsSubscription: Subscription;
+    private pageTitle = 'Clients list';
+    private token: any;
+    private static imageWidth = 50;
+    private static imageMargin = 2;
+    private errorMessage = '';
+    private filteredClients: Client[] = [];
+    private clients: Client[] = [];
+    private client: Client;
+    private ClientSubscription: Subscription;
+    private clientsSubscription: Subscription;
     constructor(
         private readonly clientService: ClientService,
         private readonly router: Router,
-        private readonly dataService: DataService,
         private readonly localStorage: StorageService) {
 
     }
@@ -73,7 +71,6 @@ export class ClientListComponent implements OnInit {
         this.clientService.getClient(id).subscribe(client => {
             this.client = client;
                 this.localStorage.setItem('clientId', id);
-                    /* this.dataService.changeIsClient(this.client); */
                 this.router.navigate([`manager/clients/${id}`]);
                 window.location.reload();
         })

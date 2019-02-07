@@ -10,8 +10,8 @@ import { FinishedOrderDTO } from '../models/finished-order.model';
 @Injectable()
 export class OrdersHttpService {
     constructor(
-        private http: HttpClient,
-        private app: AppConfig,
+        private readonly http: HttpClient,
+        private readonly app: AppConfig,
     ) { }
 
     public createOrder(order: CreateOrderDTO): Observable<object> {
