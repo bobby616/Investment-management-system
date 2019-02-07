@@ -54,19 +54,6 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,
     };
-    
-    /* this.authService.loginUser(this.loginForm.value).subscribe(
-      () => {
-        this.notificator.success('Logged in successfully!');
-        this.router.navigate(['/home']);
-      },
-      error => {
-        console.log(error);
-        this.notificator.error('Reason...', 'Login failed!');
-      }
-    ); */
-
-
     this.loginService.login(user, { observe: 'response', responseType: 'json' })
       .subscribe((data: { message: string, token: string }) => {
         localStorage.setItem('token', data.token);
@@ -84,7 +71,6 @@ export class LoginComponent implements OnInit {
         }
 
       }, (err: HttpErrorResponse) => {
-        // console.log('err', err);
 
         this.errToast();
       });

@@ -9,48 +9,29 @@ import { ManagerDTO } from '../models/manager-dto';
   styleUrls: ['./rearranger.component.css']
 })
 export class AdminRearrangerComponent implements OnInit {
-    managers: ManagerDTO[];
-    constructor(private readonly adminService: AdminService) {}
-    ngOnInit(): void {
-        this.adminService.getManagers().subscribe(
-            managers => {
-                this.managers = managers;
-            },
-            error => console.log(error)
-        );
+  managers: ManagerDTO[];
+  constructor(private readonly adminService: AdminService) { }
+  ngOnInit(): void {
+    this.adminService.getManagers().subscribe(
+      managers => {
+        this.managers = managers;
+      },
+      error => console.log(error)
+    );
+  }
+  rearrange() {
+    console.log(this)
+  }
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer !== event.container) {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    } else {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
-    drop(event: CdkDragDrop<string[]>) {
-        if (event.previousContainer !== event.container) {
-          transferArrayItem(event.previousContainer.data,
-            event.container.data,
-            event.previousIndex,
-            event.currentIndex);
-        } else {
-          moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-        }
-        console.log(event.previousContainer.data, event.container.data, this.managers)
-      }
-      dropped(event: CdkDragDrop<string[]>) {
-        if (event.previousContainer === event.container) {
-         moveItemInArray(
-           event.container.data, 
-            event.previousIndex, 
-            event.currentIndex
-         )
-        //  console.log(event.container.data, event.currentIndex);
-        } else {
-          transferArrayItem(
-           event.previousContainer.data,
-           event.container.data,
-           event.previousIndex,
-           event.currentIndex
-         );
-       }
-    }
-      entered(event: CdkDragEnter<string[]>) {
-     console.log('Entered', event.item.data);
-    }
-    exited(event: CdkDragExit<string[]>) {
-  console.log('Exited', event.item.data);
-    }
+    console.log(event.previousContainer.data, event.container.data, this.managers)
+  }
+  
 }

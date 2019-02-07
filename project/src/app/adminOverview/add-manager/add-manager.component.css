@@ -4,10 +4,10 @@
     color: #969fa4;
 }
 .form-control:focus{
-    border-color: #5cb85c;
+    border-color: #5cadb8;
 }
 .form-control, .btn{        
-    border-radius: 3px;
+    border-radius: 10px;
 }
 .signup-form{
     width: 400px;
@@ -30,9 +30,11 @@
     z-index: 2;
 }	
 .signup-form h2:before{
+    display: none;
     left: 0;
 }
 .signup-form h2:after{
+    display: none;
     right: 0;
 }
 .signup-form .hint-text{

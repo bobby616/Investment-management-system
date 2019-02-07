@@ -12,10 +12,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import { MatSelectModule, MatDialogModule, MatInputModule, MatTableModule } from '@angular/material';
 import { StocksService } from 'src/app/stock/stock.service';
 import { FundsService } from 'src/app/stock/funds.service';
-import { FundsHttpService } from 'src/app/stock/fundsReques.service';
-import { OrdersHttpService } from 'src/app/stock/ordersRequest.service';
 import { OrdersService } from 'src/app/stock/orders.service';
 import { ClientHistoryComponent } from './client-history/client-history.component';
+import { FundsHttpService } from 'src/app/stock/fundsReques.service';
+import { OrdersHttpService } from 'src/app/stock/ordersRequest.service';
 
 
 @NgModule({

@@ -1,13 +1,17 @@
-<div cdkDropListGroup>
+<div cdkDropListGroup class="grouplist">
     <!-- All lists in here will be connected. -->
     <div cdkDropList [cdkDropListData]="manager.clients"
      class="example-list" 
      (cdkDropListDropped)="drop($event)"
         *ngFor="let manager of managers">
+        <div class="example-title">
         {{manager.fullname}}
+        </div>
         <div class="example-box" *ngFor="let client of manager.clients" cdkDrag>
             {{client.firstName + ' ' + client.lastName}}
 
         </div>
     </div>
 </div>
+
+<button class="arrange-btn" (click)="rearrange()">Click Me</button>
